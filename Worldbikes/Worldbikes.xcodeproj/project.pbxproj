@@ -1,0 +1,292 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		439E813F152D010800052466 /* 07-map-marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 439E813E152D010800052466 /* 07-map-marker.png */; };
+		439F1AA7152BB602008845BE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439F1AA6152BB602008845BE /* UIKit.framework */; };
+		439F1AA9152BB602008845BE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439F1AA8152BB602008845BE /* Foundation.framework */; };
+		439F1AAB152BB602008845BE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439F1AAA152BB602008845BE /* CoreGraphics.framework */; };
+		439F1AB1152BB602008845BE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 439F1AAF152BB602008845BE /* InfoPlist.strings */; };
+		439F1AB3152BB602008845BE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 439F1AB2152BB602008845BE /* main.m */; };
+		439F1AB7152BB602008845BE /* WorldbikesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 439F1AB6152BB602008845BE /* WorldbikesAppDelegate.m */; };
+		439F1ABA152BB602008845BE /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439F1AB8152BB602008845BE /* MainStoryboard.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		439E813E152D010800052466 /* 07-map-marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07-map-marker.png"; sourceTree = "<group>"; };
+		439F1AA2152BB602008845BE /* Worldbikes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Worldbikes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		439F1AA6152BB602008845BE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		439F1AA8152BB602008845BE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		439F1AAA152BB602008845BE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		439F1AAE152BB602008845BE /* Worldbikes-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Worldbikes-Info.plist"; sourceTree = "<group>"; };
+		439F1AB0152BB602008845BE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		439F1AB2152BB602008845BE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		439F1AB4152BB602008845BE /* Worldbikes-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Worldbikes-Prefix.pch"; sourceTree = "<group>"; };
+		439F1AB5152BB602008845BE /* WorldbikesAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorldbikesAppDelegate.h; sourceTree = "<group>"; };
+		439F1AB6152BB602008845BE /* WorldbikesAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorldbikesAppDelegate.m; sourceTree = "<group>"; };
+		439F1AB9152BB602008845BE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		439F1A9F152BB602008845BE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				439F1AA7152BB602008845BE /* UIKit.framework in Frameworks */,
+				439F1AA9152BB602008845BE /* Foundation.framework in Frameworks */,
+				439F1AAB152BB602008845BE /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		439E813B152CFB9300052466 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				439E813E152D010800052466 /* 07-map-marker.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		439F1A97152BB602008845BE = {
+			isa = PBXGroup;
+			children = (
+				439E813B152CFB9300052466 /* images */,
+				439F1AAC152BB602008845BE /* Worldbikes */,
+				439F1AA5152BB602008845BE /* Frameworks */,
+				439F1AA3152BB602008845BE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		439F1AA3152BB602008845BE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				439F1AA2152BB602008845BE /* Worldbikes.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		439F1AA5152BB602008845BE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				439F1AA6152BB602008845BE /* UIKit.framework */,
+				439F1AA8152BB602008845BE /* Foundation.framework */,
+				439F1AAA152BB602008845BE /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		439F1AAC152BB602008845BE /* Worldbikes */ = {
+			isa = PBXGroup;
+			children = (
+				439F1AB5152BB602008845BE /* WorldbikesAppDelegate.h */,
+				439F1AB6152BB602008845BE /* WorldbikesAppDelegate.m */,
+				439F1AB8152BB602008845BE /* MainStoryboard.storyboard */,
+				439F1AAD152BB602008845BE /* Supporting Files */,
+			);
+			path = Worldbikes;
+			sourceTree = "<group>";
+		};
+		439F1AAD152BB602008845BE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				439F1AAE152BB602008845BE /* Worldbikes-Info.plist */,
+				439F1AAF152BB602008845BE /* InfoPlist.strings */,
+				439F1AB2152BB602008845BE /* main.m */,
+				439F1AB4152BB602008845BE /* Worldbikes-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		439F1AA1152BB602008845BE /* Worldbikes */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 439F1ACB152BB602008845BE /* Build configuration list for PBXNativeTarget "Worldbikes" */;
+			buildPhases = (
+				439F1A9E152BB602008845BE /* Sources */,
+				439F1A9F152BB602008845BE /* Frameworks */,
+				439F1AA0152BB602008845BE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Worldbikes;
+			productName = Worldbikes;
+			productReference = 439F1AA2152BB602008845BE /* Worldbikes.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		439F1A99152BB602008845BE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = Worldbikes;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Ericsson Software Campus";
+			};
+			buildConfigurationList = 439F1A9C152BB602008845BE /* Build configuration list for PBXProject "Worldbikes" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 439F1A97152BB602008845BE;
+			productRefGroup = 439F1AA3152BB602008845BE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				439F1AA1152BB602008845BE /* Worldbikes */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		439F1AA0152BB602008845BE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				439F1AB1152BB602008845BE /* InfoPlist.strings in Resources */,
+				439F1ABA152BB602008845BE /* MainStoryboard.storyboard in Resources */,
+				439E813F152D010800052466 /* 07-map-marker.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		439F1A9E152BB602008845BE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				439F1AB3152BB602008845BE /* main.m in Sources */,
+				439F1AB7152BB602008845BE /* WorldbikesAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		439F1AAF152BB602008845BE /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				439F1AB0152BB602008845BE /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		439F1AB8152BB602008845BE /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				439F1AB9152BB602008845BE /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		439F1AC9152BB602008845BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		439F1ACA152BB602008845BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		439F1ACC152BB602008845BE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Worldbikes/Worldbikes-Prefix.pch";
+				INFOPLIST_FILE = "Worldbikes/Worldbikes-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = "ß";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		439F1ACD152BB602008845BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Worldbikes/Worldbikes-Prefix.pch";
+				INFOPLIST_FILE = "Worldbikes/Worldbikes-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = "ß";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		439F1A9C152BB602008845BE /* Build configuration list for PBXProject "Worldbikes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				439F1AC9152BB602008845BE /* Debug */,
+				439F1ACA152BB602008845BE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		439F1ACB152BB602008845BE /* Build configuration list for PBXNativeTarget "Worldbikes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				439F1ACC152BB602008845BE /* Debug */,
+				439F1ACD152BB602008845BE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 439F1A99152BB602008845BE /* Project object */;
+}
