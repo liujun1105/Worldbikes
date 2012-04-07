@@ -7,6 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4318108915308E1C0063983A /* Country+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4318108815308E1C0063983A /* Country+CRUD.m */; };
+		4318108C15309BEF0063983A /* City+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4318108B15309BEF0063983A /* City+CRUD.m */; };
+		4318108D1530A04C0063983A /* City+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4318108B15309BEF0063983A /* City+CRUD.m */; };
+		4318108E1530A04F0063983A /* Country+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4318108815308E1C0063983A /* Country+CRUD.m */; };
+		431810911530A0C40063983A /* TestMOCountry.m in Sources */ = {isa = PBXBuildFile; fileRef = 431810901530A0C40063983A /* TestMOCountry.m */; };
+		431810941530A9640063983A /* WorldbikesModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4349293A152F806300B6EA8C /* WorldbikesModel.xcdatamodeld */; };
+		431810A61530B14D0063983A /* WorldbikesModel.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 4349293A152F806300B6EA8C /* WorldbikesModel.xcdatamodeld */; };
+		431810A71530B44B0063983A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439F1AAA152BB602008845BE /* CoreGraphics.framework */; };
+		431810A81530B49E0063983A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 431810951530A9960063983A /* CoreData.framework */; };
+		431810A91530B4DE0063983A /* TestMOCountry.h in Resources */ = {isa = PBXBuildFile; fileRef = 4318108F1530A0C40063983A /* TestMOCountry.h */; };
+		431810AA1530B4E40063983A /* TestXMLParser.h in Resources */ = {isa = PBXBuildFile; fileRef = 4318107B153059450063983A /* TestXMLParser.h */; };
+		431810AB1530B6A70063983A /* TestXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4318107C153059450063983A /* TestXMLParser.m */; };
+		431810B91530CE5D0063983A /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 431810B81530CE5D0063983A /* City.m */; };
+		431810BC1530CE5D0063983A /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 431810BB1530CE5D0063983A /* Country.m */; };
+		431810BF1530CE5D0063983A /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = 431810BE1530CE5D0063983A /* Station.m */; };
+		431810C01530CEDC0063983A /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = 431810BE1530CE5D0063983A /* Station.m */; };
+		431810C11530CEE00063983A /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 431810BB1530CE5D0063983A /* Country.m */; };
+		431810C21530CEE30063983A /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 431810B81530CE5D0063983A /* City.m */; };
+		4349293C152F806400B6EA8C /* WorldbikesModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4349293A152F806300B6EA8C /* WorldbikesModel.xcdatamodeld */; };
+		43694074152F92B8004562DA /* XMLParserDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43694073152F92B8004562DA /* XMLParserDelegate.m */; };
+		43694088152F9977004562DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439F1AA6152BB602008845BE /* UIKit.framework */; };
+		43694089152F9977004562DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439F1AA8152BB602008845BE /* Foundation.framework */; };
+		4369408F152F9977004562DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4369408D152F9977004562DA /* InfoPlist.strings */; };
+		43694099152F9BEE004562DA /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43694098152F9BEE004562DA /* SenTestingKit.framework */; };
+		436940A5152FC951004562DA /* XMLParserDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 43694073152F92B8004562DA /* XMLParserDelegate.m */; };
 		439E813F152D010800052466 /* 07-map-marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 439E813E152D010800052466 /* 07-map-marker.png */; };
 		439F1AA7152BB602008845BE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439F1AA6152BB602008845BE /* UIKit.framework */; };
 		439F1AA9152BB602008845BE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439F1AA8152BB602008845BE /* Foundation.framework */; };
@@ -18,6 +43,29 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4318107B153059450063983A /* TestXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestXMLParser.h; sourceTree = "<group>"; };
+		4318107C153059450063983A /* TestXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestXMLParser.m; sourceTree = "<group>"; };
+		4318108715308E1C0063983A /* Country+CRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Country+CRUD.h"; sourceTree = "<group>"; };
+		4318108815308E1C0063983A /* Country+CRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Country+CRUD.m"; sourceTree = "<group>"; };
+		4318108A15309BEF0063983A /* City+CRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "City+CRUD.h"; sourceTree = "<group>"; };
+		4318108B15309BEF0063983A /* City+CRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "City+CRUD.m"; sourceTree = "<group>"; };
+		4318108F1530A0C40063983A /* TestMOCountry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestMOCountry.h; sourceTree = "<group>"; };
+		431810901530A0C40063983A /* TestMOCountry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestMOCountry.m; sourceTree = "<group>"; };
+		431810951530A9960063983A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		431810B71530CE5D0063983A /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = City.h; sourceTree = "<group>"; };
+		431810B81530CE5D0063983A /* City.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = City.m; sourceTree = "<group>"; };
+		431810BA1530CE5D0063983A /* Country.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Country.h; sourceTree = "<group>"; };
+		431810BB1530CE5D0063983A /* Country.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Country.m; sourceTree = "<group>"; };
+		431810BD1530CE5D0063983A /* Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Station.h; sourceTree = "<group>"; };
+		431810BE1530CE5D0063983A /* Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Station.m; sourceTree = "<group>"; };
+		4349293B152F806400B6EA8C /* Worldbikes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Worldbikes.xcdatamodel; sourceTree = "<group>"; };
+		43694072152F92B8004562DA /* XMLParserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParserDelegate.h; sourceTree = "<group>"; };
+		43694073152F92B8004562DA /* XMLParserDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParserDelegate.m; sourceTree = "<group>"; };
+		43694085152F9977004562DA /* WorldbikesUnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorldbikesUnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4369408C152F9977004562DA /* WorldbikesUnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WorldbikesUnitTests-Info.plist"; sourceTree = "<group>"; };
+		4369408E152F9977004562DA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		43694093152F9977004562DA /* WorldbikesUnitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WorldbikesUnitTests-Prefix.pch"; sourceTree = "<group>"; };
+		43694098152F9BEE004562DA /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		439E813E152D010800052466 /* 07-map-marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07-map-marker.png"; sourceTree = "<group>"; };
 		439F1AA2152BB602008845BE /* Worldbikes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Worldbikes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		439F1AA6152BB602008845BE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -33,6 +81,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		43694081152F9977004562DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				431810A81530B49E0063983A /* CoreData.framework in Frameworks */,
+				431810A71530B44B0063983A /* CoreGraphics.framework in Frameworks */,
+				43694099152F9BEE004562DA /* SenTestingKit.framework in Frameworks */,
+				43694088152F9977004562DA /* UIKit.framework in Frameworks */,
+				43694089152F9977004562DA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		439F1A9F152BB602008845BE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -46,6 +106,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		43492938152F803500B6EA8C /* model */ = {
+			isa = PBXGroup;
+			children = (
+				4349293A152F806300B6EA8C /* WorldbikesModel.xcdatamodeld */,
+				431810B71530CE5D0063983A /* City.h */,
+				431810B81530CE5D0063983A /* City.m */,
+				431810BA1530CE5D0063983A /* Country.h */,
+				431810BB1530CE5D0063983A /* Country.m */,
+				431810BD1530CE5D0063983A /* Station.h */,
+				431810BE1530CE5D0063983A /* Station.m */,
+				4318108715308E1C0063983A /* Country+CRUD.h */,
+				4318108815308E1C0063983A /* Country+CRUD.m */,
+				4318108A15309BEF0063983A /* City+CRUD.h */,
+				4318108B15309BEF0063983A /* City+CRUD.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		4369408A152F9977004562DA /* WorldbikesUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				4318107B153059450063983A /* TestXMLParser.h */,
+				4318107C153059450063983A /* TestXMLParser.m */,
+				4369408B152F9977004562DA /* Supporting Files */,
+				4318108F1530A0C40063983A /* TestMOCountry.h */,
+				431810901530A0C40063983A /* TestMOCountry.m */,
+			);
+			path = WorldbikesUnitTests;
+			sourceTree = "<group>";
+		};
+		4369408B152F9977004562DA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4369408C152F9977004562DA /* WorldbikesUnitTests-Info.plist */,
+				4369408D152F9977004562DA /* InfoPlist.strings */,
+				43694093152F9977004562DA /* WorldbikesUnitTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		439E813B152CFB9300052466 /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -57,8 +157,8 @@
 		439F1A97152BB602008845BE = {
 			isa = PBXGroup;
 			children = (
-				439E813B152CFB9300052466 /* images */,
 				439F1AAC152BB602008845BE /* Worldbikes */,
+				4369408A152F9977004562DA /* WorldbikesUnitTests */,
 				439F1AA5152BB602008845BE /* Frameworks */,
 				439F1AA3152BB602008845BE /* Products */,
 			);
@@ -68,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				439F1AA2152BB602008845BE /* Worldbikes.app */,
+				43694085152F9977004562DA /* WorldbikesUnitTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -75,6 +176,8 @@
 		439F1AA5152BB602008845BE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				431810951530A9960063983A /* CoreData.framework */,
+				43694098152F9BEE004562DA /* SenTestingKit.framework */,
 				439F1AA6152BB602008845BE /* UIKit.framework */,
 				439F1AA8152BB602008845BE /* Foundation.framework */,
 				439F1AAA152BB602008845BE /* CoreGraphics.framework */,
@@ -85,6 +188,10 @@
 		439F1AAC152BB602008845BE /* Worldbikes */ = {
 			isa = PBXGroup;
 			children = (
+				43694072152F92B8004562DA /* XMLParserDelegate.h */,
+				43694073152F92B8004562DA /* XMLParserDelegate.m */,
+				439E813B152CFB9300052466 /* images */,
+				43492938152F803500B6EA8C /* model */,
 				439F1AB5152BB602008845BE /* WorldbikesAppDelegate.h */,
 				439F1AB6152BB602008845BE /* WorldbikesAppDelegate.m */,
 				439F1AB8152BB602008845BE /* MainStoryboard.storyboard */,
@@ -107,6 +214,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		43694084152F9977004562DA /* WorldbikesUnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43694094152F9977004562DA /* Build configuration list for PBXNativeTarget "WorldbikesUnitTests" */;
+			buildPhases = (
+				43694080152F9977004562DA /* Sources */,
+				43694081152F9977004562DA /* Frameworks */,
+				43694082152F9977004562DA /* Resources */,
+				43694083152F9977004562DA /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WorldbikesUnitTests;
+			productName = TestWorldbikes;
+			productReference = 43694085152F9977004562DA /* WorldbikesUnitTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		439F1AA1152BB602008845BE /* Worldbikes */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 439F1ACB152BB602008845BE /* Build configuration list for PBXNativeTarget "Worldbikes" */;
@@ -147,11 +272,23 @@
 			projectRoot = "";
 			targets = (
 				439F1AA1152BB602008845BE /* Worldbikes */,
+				43694084152F9977004562DA /* WorldbikesUnitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		43694082152F9977004562DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				431810AA1530B4E40063983A /* TestXMLParser.h in Resources */,
+				431810A91530B4DE0063983A /* TestMOCountry.h in Resources */,
+				431810A61530B14D0063983A /* WorldbikesModel.xcdatamodeld in Resources */,
+				4369408F152F9977004562DA /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		439F1AA0152BB602008845BE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -164,19 +301,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		43694083152F9977004562DA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		43694080152F9977004562DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				431810C21530CEE30063983A /* City.m in Sources */,
+				431810C11530CEE00063983A /* Country.m in Sources */,
+				431810C01530CEDC0063983A /* Station.m in Sources */,
+				431810AB1530B6A70063983A /* TestXMLParser.m in Sources */,
+				431810941530A9640063983A /* WorldbikesModel.xcdatamodeld in Sources */,
+				4318108E1530A04F0063983A /* Country+CRUD.m in Sources */,
+				4318108D1530A04C0063983A /* City+CRUD.m in Sources */,
+				436940A5152FC951004562DA /* XMLParserDelegate.m in Sources */,
+				431810911530A0C40063983A /* TestMOCountry.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		439F1A9E152BB602008845BE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				439F1AB3152BB602008845BE /* main.m in Sources */,
 				439F1AB7152BB602008845BE /* WorldbikesAppDelegate.m in Sources */,
+				4349293C152F806400B6EA8C /* WorldbikesModel.xcdatamodeld in Sources */,
+				43694074152F92B8004562DA /* XMLParserDelegate.m in Sources */,
+				4318108915308E1C0063983A /* Country+CRUD.m in Sources */,
+				4318108C15309BEF0063983A /* City+CRUD.m in Sources */,
+				431810B91530CE5D0063983A /* City.m in Sources */,
+				431810BC1530CE5D0063983A /* Country.m in Sources */,
+				431810BF1530CE5D0063983A /* Station.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		4369408D152F9977004562DA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4369408E152F9977004562DA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		439F1AAF152BB602008845BE /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -196,6 +380,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		43694095152F9977004562DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WorldbikesUnitTests/WorldbikesUnitTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "WorldbikesUnitTests/WorldbikesUnitTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		43694096152F9977004562DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WorldbikesUnitTests/WorldbikesUnitTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "WorldbikesUnitTests/WorldbikesUnitTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		439F1AC9152BB602008845BE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -268,6 +490,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		43694094152F9977004562DA /* Build configuration list for PBXNativeTarget "WorldbikesUnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43694095152F9977004562DA /* Debug */,
+				43694096152F9977004562DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		439F1A9C152BB602008845BE /* Build configuration list for PBXProject "Worldbikes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -287,6 +518,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4349293A152F806300B6EA8C /* WorldbikesModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4349293B152F806400B6EA8C /* Worldbikes.xcdatamodel */,
+			);
+			currentVersion = 4349293B152F806400B6EA8C /* Worldbikes.xcdatamodel */;
+			path = WorldbikesModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 439F1A99152BB602008845BE /* Project object */;
 }

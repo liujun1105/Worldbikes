@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>WorldbikesUnitTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>43694084152F9977004562DA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>439F1AA1152BB602008845BE</key>
 		<dict>
 			<key>primary</key>
