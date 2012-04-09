@@ -25,7 +25,13 @@
                   Identifier = "TestXMLObjects">
                </Test>
                <Test
+                  Identifier = "TestMOCountry">
+               </Test>
+               <Test
                   Identifier = "TestXMLParser">
+               </Test>
+               <Test
+                  Identifier = "TestSettingModel">
                </Test>
             </SkippedTests>
          </TestableReference>

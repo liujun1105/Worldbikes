@@ -10,4 +10,16 @@
 
 @implementation XObjCountry
 
+@synthesize countryName = _countryName;
+@synthesize cities = _cities;
+
+-(id) init
+{
+    self = [super init];
+    if (self) {
+        self.cities = [NSMutableArray array];
+    }
+    return self;
+}
+
 @end

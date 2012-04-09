@@ -8,6 +8,16 @@
 
 #import "XMLCrawler.h"
 
+@interface XMLCrawler ()
+@property (nonatomic,strong) NSArray *data;
+@end
+
 @implementation XMLCrawler
+@synthesize data = _data;
+
+- (void) grabData:(NSArray*) data
+{
+    self.data = [NSArray arrayWithArray:data];
+}
 
 @end

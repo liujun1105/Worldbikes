@@ -1,18 +1,19 @@
 //
-//  StationMapViewController.m
+//  WorldbikesMapViewController.m
 //  Worldbikes
 //
 //  Created by a亲爱的 我自己 on 08/04/2012.
 //  Copyright (c) 2012 Ericsson Software Campus. All rights reserved.
 //
 
-#import "StationMapViewController.h"
+#import "WorldbikesMapViewController.h"
 
-@interface StationMapViewController ()
+@interface WorldbikesMapViewController ()
 
 @end
 
-@implementation StationMapViewController
+@implementation WorldbikesMapViewController
+@synthesize mapView = _mapView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -23,14 +24,26 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {  
+    // set default location to Dublin
+    CLLocationCoordinate2D zoomLocation;
+    zoomLocation.latitude = 53.349706;
+    zoomLocation.longitude= -6.261928;
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
+    MKCoordinateRegion adjustedRegion = [self.mapView regionThatFits:viewRegion];                
+    [self.mapView setRegion:adjustedRegion animated:YES];      
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+
 }
 
 - (void)viewDidUnload
 {
+    [self setMapView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

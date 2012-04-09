@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XMLCrawlerDelegate.h"
 
-@interface XMLCrawler : NSObject
+@interface XMLCrawler : NSObject <XMLCrawlerDelegate>
 
 @end

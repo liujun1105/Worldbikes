@@ -6,13 +6,16 @@
 //  Copyright (c) 2012 Ericsson Software Campus. All rights reserved.
 //
 
-#import "SettingTableViewController.h"
+#import "CountrySettingTableViewController.h"
+#import "XMLParserDelegate.h"
+#import "CitySettingViewController.h"
 
-@interface SettingTableViewController ()
+@interface CountrySettingTableViewController ()
 
 @end
 
-@implementation SettingTableViewController
+@implementation CountrySettingTableViewController
+@synthesize countrySettingModel = _settingModel;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -23,19 +26,29 @@
     return self;
 }
 
+- (void)loadSupportedCountries
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:TRUE];
+    dispatch_queue_t downloadQ = dispatch_queue_create("Bycicle Scheme Supported Countries Download", NULL);
+    dispatch_async(downloadQ, ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.countrySettingModel setup];
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:FALSE];
+        });
+    });
+    dispatch_release(downloadQ);
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self loadSupportedCountries];
 }
 
 - (void)viewDidUnload
 {
+    [self setCountrySettingModel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -50,26 +63,34 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    
+    return [self.countrySettingModel countrySize];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"SupportedCountryCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    // Configure the cell...
+    
+    cell.textLabel.text = [self.countrySettingModel nameOfCountryAtIndex:indexPath.row];
     
     return cell;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+    
+    CitySettingViewController *citySettingViewController = [segue destinationViewController];
+    [citySettingViewController setCountryName:[self.countrySettingModel nameOfCountryAtIndex:indexPath.row]];
+    [citySettingViewController setCountryIndex:indexPath.row];
+    [citySettingViewController setCitySettingModel:self.countrySettingModel];
 }
 
 /*

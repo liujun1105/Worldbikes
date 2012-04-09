@@ -10,4 +10,13 @@
 
 @interface SettingModel : NSObject
 
+- (void) setup;
+
+- (int) indexOfCountry:(NSString*) countryName;
+- (int) countrySize;
+- (int) numberOfCitiesInCountryAtIndex:(int) index;
+- (NSString*) nameOfCountryAtIndex:(int) index;
+- (NSArray*) citiesOfCountry:(NSString*) countryName;
+- (NSArray*) citiesOfCountryAtIndex:(int) countryIndex;
+- (NSString*) nameOfCityAtIndex:(int) cityIndex OfCountryAtIndex:(int) countryIndex;
 @end

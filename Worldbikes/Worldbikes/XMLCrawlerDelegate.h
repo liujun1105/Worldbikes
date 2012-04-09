@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol Crawler <NSObject>
+@protocol XMLCrawlerDelegate <NSObject>
+
+- (NSArray*) data;
+- (void) grabData:(NSArray*) data;
 
 @end

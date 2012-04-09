@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SettingModel.h"
 
 @interface CitySettingViewController : UITableViewController
+@property (nonatomic,strong) NSString *countryName;
+@property (nonatomic) int countryIndex;
+@property (strong, nonatomic) IBOutlet SettingModel *citySettingModel;
+
 
 @end

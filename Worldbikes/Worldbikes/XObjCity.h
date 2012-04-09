@@ -1,5 +1,5 @@
 //
-//  CountryDAO.h
+//  XObjCity.h
 //  Worldbikes
 //
 //  Created by a亲爱的 我自己 on 08/04/2012.
@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CountryDAO : NSObject
+@interface XObjCity : NSObject
+
+@property (nonatomic, retain) NSString * cityName;
+@property (nonatomic, retain) NSString * url;
 
 @end

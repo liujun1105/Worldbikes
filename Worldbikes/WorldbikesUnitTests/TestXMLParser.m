@@ -7,11 +7,13 @@
 //
 
 #import "TestXMLParser.h"
-#import "XMLParserDelegate.h"
+#import "DefaultXMLParserDelegate.h"
+#import "XObjCity.h"
+#import "XObjCountry.h"
 
 @interface TestXMLParser ()
 
-@property (nonatomic,strong) XMLParserDelegate *delegate;
+@property (nonatomic,strong) DefaultXMLParserDelegate *delegate;
 
 @end
 
@@ -21,7 +23,7 @@
 
 -(void) testXMLParserDelegateInit
 {
-    self.delegate = [[XMLParserDelegate alloc] init];
+    self.delegate = [[DefaultXMLParserDelegate alloc] init];
     STAssertNotNil(self.delegate,@"failed to initialise an XMLParserDelegate object");
 }
 
@@ -33,10 +35,11 @@
     
     STAssertNotNil(parser, @"failed to initialise a NSXMLParser object");
     
-    self.delegate = [[XMLParserDelegate alloc] init];
+    self.delegate = [[DefaultXMLParserDelegate alloc] init];
     parser.delegate = self.delegate;
     
     STAssertTrue([parser parse], @"parsing failed");
+
 }
 
 @end

@@ -10,4 +10,7 @@
 
 @interface XObjCountry : NSObject
 
+@property (nonatomic, strong) NSString * countryName;
+@property (nonatomic, strong) NSMutableArray *cities;
+
 @end

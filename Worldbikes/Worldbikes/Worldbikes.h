@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define CORE_DATA_DOCUMENT @"Worldbikes_CoreData"
+
 @protocol Worldbikes <NSObject>
 
 @end

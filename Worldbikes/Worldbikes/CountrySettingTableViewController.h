@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SettingModel.h"
 
-@interface SettingTableViewController : UITableViewController
+@interface CountrySettingTableViewController : UITableViewController
+@property (strong, nonatomic) IBOutlet SettingModel *countrySettingModel;
 
 @end
