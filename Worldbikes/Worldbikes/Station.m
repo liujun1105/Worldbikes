@@ -2,7 +2,7 @@
 //  Station.m
 //  Worldbikes
 //
-//  Created by a亲爱的 我自己 on 07/04/2012.
+//  Created by a亲爱的 我自己 on 16/04/2012.
 //  Copyright (c) 2012 Ericsson Software Campus. All rights reserved.
 //
 
@@ -12,15 +12,13 @@
 
 @implementation Station
 
-@dynamic address;
-@dynamic available;
-@dynamic free;
-@dynamic fullAddress;
-@dynamic lat;
-@dynamic lng;
+@dynamic stationAddress;
+@dynamic stationFullAddress;
 @dynamic stationID;
-@dynamic ticket;
-@dynamic total;
+@dynamic stationLatitude;
+@dynamic stationLongitude;
+@dynamic stationName;
+@dynamic isFavourite;
 @dynamic city;
 
 @end

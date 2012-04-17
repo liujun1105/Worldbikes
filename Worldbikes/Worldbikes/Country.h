@@ -2,7 +2,7 @@
 //  Country.h
 //  Worldbikes
 //
-//  Created by a亲爱的 我自己 on 07/04/2012.
+//  Created by a亲爱的 我自己 on 15/04/2012.
 //  Copyright (c) 2012 Ericsson Software Campus. All rights reserved.
 //
 
@@ -23,4 +23,5 @@
 - (void)removeCitiesObject:(City *)value;
 - (void)addCities:(NSSet *)values;
 - (void)removeCities:(NSSet *)values;
+
 @end
