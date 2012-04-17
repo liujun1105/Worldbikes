@@ -9,5 +9,14 @@
 #import "XObjRealtimeInfo.h"
 
 @implementation XObjRealtimeInfo
+@synthesize available = _available;
+@synthesize total = _total;
+@synthesize free = _free;
+@synthesize ticket = _ticket;
+
+- (NSString*) description
+{
+    return [NSString stringWithFormat:@"%d,%d,%d,%d", self.available, self.free,self.total,self.ticket];
+}
 
 @end

@@ -8,6 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+@class WorldbikesCoreService;
+@class XObjRealtimeInfo;
+
 @interface WorldbikesCoreServiceModel : NSObject
 
++ (WorldbikesCoreService*) CoreService;
+- (NSArray*) bicycleSchemes:(NSURL *) url;
+- (NSArray*) stations:(NSURL *) url;
+- (NSArray*) realtimeInfo:(NSURL *) url;
+- (NSArray*) stationDataForMapAnnotation:(NSString*) urlPath;
+- (NSArray*) cityPreferences;
+
+- (NSArray*) allStationsInCity:(NSString*) cityName;
+- (NSDictionary*) realtimeInfoOfStation:(int) stationID inCity:(NSString*) cityName;
 @end

@@ -12,11 +12,13 @@
 
 @interface CityDAO : NSObject
 
-- (City*) addCity:(NSString*) countryName inManagedObjectContext:(NSManagedObjectContext *)context;
+- (City*) addCity:(NSString*) cityName withUrlPath:(NSString*) urlPath inManagedObjectContext:(NSManagedObjectContext *)context;
 
 - (City*) city:(NSString*) cityName inManagedObjectContext:(NSManagedObjectContext *)context;
 - (BOOL) deleteCity:(NSString *) cityName inManagedObjectContext:(NSManagedObjectContext *)context;
 
 - (NSString*) countryOfCity:(NSString*) cityName inManagedObjectContext:(NSManagedObjectContext *)context;
+
+- (NSArray*) allCitiesInManagedObjectContext:(NSManagedObjectContext *)context;
 
 @end

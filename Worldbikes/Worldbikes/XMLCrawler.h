@@ -11,4 +11,6 @@
 
 @interface XMLCrawler : NSObject <XMLCrawlerDelegate>
 
+- (BOOL) startCrawling:(NSURL*) url withHandler:(id)parserHandler;
+
 @end

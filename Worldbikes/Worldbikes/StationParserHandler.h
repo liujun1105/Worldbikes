@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WorldbikesParserHandler.h"
 
-@interface StationParserHandler : NSObject
+@interface StationParserHandler : NSObject <WorldbikesParserHandler>
 
 @end

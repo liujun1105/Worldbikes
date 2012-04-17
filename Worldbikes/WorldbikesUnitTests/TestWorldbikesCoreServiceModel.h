@@ -8,6 +8,6 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-@interface WorldbikesCoreServiceModel : SenTestCase
+@interface TestWorldbikesCoreServiceModel : SenTestCase
 
 @end

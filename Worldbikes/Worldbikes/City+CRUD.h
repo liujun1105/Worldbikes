@@ -9,5 +9,8 @@
 #import "City.h"
 
 @interface City (CRUD)
-
+- (void)addStationsObject:(Station *)value;
+- (void)removeStationsObject:(Station *)value;
+- (void)addStations:(NSSet *)values;
+- (void)removeStations:(NSSet *)values;
 @end

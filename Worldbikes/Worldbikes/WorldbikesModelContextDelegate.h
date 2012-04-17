@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+@class NSManagedObjectContext;
+
 @protocol WorldbikesModelContextDelegate <NSObject>
+
+- (NSManagedObjectContext*) managedObjectContext;
 
 @end

@@ -6,28 +6,28 @@
 //  Copyright (c) 2012 Ericsson Software Campus. All rights reserved.
 //
 
-#import "TestXMLParser.h"
-#import "DefaultXMLParserDelegate.h"
+#import "TestCityParserHandler.h"
+#import "CityParserHandler.h"
 #import "XObjCity.h"
 #import "XObjCountry.h"
 
-@interface TestXMLParser ()
+@interface TestCityParserHandler ()
 
-@property (nonatomic,strong) DefaultXMLParserDelegate *delegate;
+@property (nonatomic,strong) CityParserHandler *parserHandler;
 
 @end
 
 
-@implementation TestXMLParser
-@synthesize delegate = _delegate;
+@implementation TestCityParserHandler
+@synthesize parserHandler = _parserHandler;
 
--(void) testXMLParserDelegateInit
+-(void) testParserHandlerInit
 {
-    self.delegate = [[DefaultXMLParserDelegate alloc] init];
-    STAssertNotNil(self.delegate,@"failed to initialise an XMLParserDelegate object");
+    self.parserHandler = [[CityParserHandler alloc] init];
+    STAssertNotNil(self.parserHandler,@ "failed to initialise an XMLParserDelegate object");
 }
 
--(void) testParser
+-(void) testParserHandler
 {
     NSURL *url = [NSURL URLWithString:@"http://www.drpangpang.com/worldbikes.xml"];
     
@@ -35,8 +35,8 @@
     
     STAssertNotNil(parser, @"failed to initialise a NSXMLParser object");
     
-    self.delegate = [[DefaultXMLParserDelegate alloc] init];
-    parser.delegate = self.delegate;
+    self.parserHandler = [[CityParserHandler alloc] init];
+    parser.delegate = self.parserHandler;
     
     STAssertTrue([parser parse], @"parsing failed");
 

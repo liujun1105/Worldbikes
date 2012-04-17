@@ -6,38 +6,45 @@
 //  Copyright (c) 2012 Ericsson Software Campus. All rights reserved.
 //
 
-#import "TestSettingModel.h"
-#import "SettingModel.h"
+#import "TestWorldbikesPreferenceModel.h"
+#import "WorldbikesPreferenceModel.h"
 #import "XObjCity.h"
-@interface TestSettingModel ()
+#import "ModelContextTestDelegate.h"
+#import "WorldbikesCoreServiceModel.h"
+#import "WorldbikesCoreService.h"
 
-@property (nonatomic,strong) SettingModel *settingModel;
+@interface TestWorldbikesPreferenceModel ()
 
+@property (nonatomic,strong) WorldbikesPreferenceModel *preference;
+@property (nonatomic,strong) ModelContextTestDelegate *delegate;
 @end
 
-@implementation TestSettingModel
-@synthesize settingModel = _settingModel;
+@implementation TestWorldbikesPreferenceModel
+@synthesize preference = _preference;
+@synthesize delegate = _delegate;
 
 - (void) setUp
 {
-    self.settingModel = [[SettingModel alloc] init];    
-    [self.settingModel setup];
+    self.preference = [[WorldbikesPreferenceModel alloc] init];   
+    self.delegate = [[ModelContextTestDelegate alloc] init];
+//    self.preference.worldbikesCoreService.delegate = self.delegate;
+    [self.preference setup];
 }
 
 - (void) testNumberOfCountries
 {
-    STAssertEquals([self.settingModel countrySize], 9, @"incorrect country size");
+    STAssertEquals([self.preference countrySize], 9, @"incorrect country size");
 }
 
 - (void) testNumberOfCities
 {
-    int index = [self.settingModel indexOfCountry:@"Ireland"];
-    STAssertEquals([self.settingModel numberOfCitiesInCountryAtIndex:index], 1, @"invalide city size");
+    int index = [self.preference indexOfCountry:@"Ireland"];
+    STAssertEquals([self.preference numberOfCitiesInCountryAtIndex:index], 1, @"invalide city size");
 }
 
 - (void) testGetCitiesWitCountryName
 {
-    NSArray *cities = [self.settingModel citiesOfCountry:@"Ireland"];
+    NSArray *cities = [self.preference citiesOfCountry:@"Ireland"];
     STAssertTrue([cities count]==1, @"incorrect number of cities");
     XObjCity *city = [cities lastObject];
     STAssertTrue([city.cityName isEqualToString:@"Dublin"], @"incorrect city name");
@@ -45,8 +52,8 @@
 
 - (void) testGetCitiesWitCountryIndex
 {
-    int index = [self.settingModel indexOfCountry:@"Ireland"];
-    NSArray *cities = [self.settingModel citiesOfCountryAtIndex:index];
+    int index = [self.preference indexOfCountry:@"Ireland"];
+    NSArray *cities = [self.preference citiesOfCountryAtIndex:index];
     STAssertTrue([cities count]==1, @"incorrect number of cities");
     XObjCity *city = [cities lastObject];
     STAssertTrue([city.cityName isEqualToString:@"Dublin"], @"incorrect city name");

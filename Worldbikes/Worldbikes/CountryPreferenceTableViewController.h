@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SettingModel.h"
+#import "WorldbikesPreferenceModel.h"
+#import "CityPreferenceTableViewController.h"
+#import "Worldbikes.h"
+#import "WorldbikesPreferenceModel.h"
 
-@interface CountrySettingTableViewController : UITableViewController
-@property (strong, nonatomic) IBOutlet SettingModel *countrySettingModel;
+@interface CountryPreferenceTableViewController : UITableViewController
+@property (strong, nonatomic) IBOutlet WorldbikesPreferenceModel *preference;
 
 @end

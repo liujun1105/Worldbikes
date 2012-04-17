@@ -10,4 +10,9 @@
 
 @interface XObjRealtimeInfo : NSObject
 
+@property (nonatomic) int available;
+@property (nonatomic) int free;
+@property (nonatomic) int total;
+@property (nonatomic) int ticket;
+
 @end

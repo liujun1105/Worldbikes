@@ -7,12 +7,13 @@
 //
 
 #import "CityDAO.h"
-#import "City+CRUD.h"
+#import "City.h"
 #import "Country.h"
+#import "Worldbikes.h"
 
 @implementation CityDAO
 
-- (City*) addCity:(NSString*) cityName inManagedObjectContext:(NSManagedObjectContext *)context
+- (City*) addCity:(NSString*) cityName withUrlPath:(NSString*) urlPath inManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"City"];
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"cityName = %@", cityName];
@@ -22,7 +23,7 @@
     NSError *error;
     NSArray *matches = [context executeFetchRequest:fetchRequest error:&error];
     
-    if (error) NSLog(@"error when retrieving place entities %@", error);
+    if (error) NSLog(@"error when retrieving city entities %@", error);
     
     City *city;
     
@@ -30,6 +31,7 @@
     else if ([matches count] == 0) {
         city = [NSEntityDescription insertNewObjectForEntityForName:@"City" inManagedObjectContext:context];
         city.cityName = cityName;
+        city.url = urlPath;
     }
     else city = [matches lastObject];
         
@@ -46,7 +48,7 @@
     NSError *error;
     NSArray *matches = [context executeFetchRequest:fetchRequest error:&error];
     
-    if (error) NSLog(@"error when retrieving place entities %@", error);
+    if (error) NSLog(@"error when retrieving city entities %@", error);
         
     assert([matches count] == 0 || [matches count] == 1);
     
@@ -58,12 +60,12 @@
     City *city = [self city:cityName inManagedObjectContext:context];
     
     if (nil == city) {
-        return false;
+        return FALSE;
     }
-    else {
-        [context deleteObject:city];
-        return true;
-    }
+
+    [context deleteObject:city];
+    return TRUE;
+
 }
 
 - (NSString*) countryOfCity:(NSString*) cityName inManagedObjectContext:(NSManagedObjectContext *)context
@@ -76,6 +78,22 @@
     else {
         return city.country.countryName;
     }
+}
+
+- (NSArray*) allCitiesInManagedObjectContext:(NSManagedObjectContext *)context
+{
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"City"];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"cityName" ascending:YES];
+    fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    
+    NSError *error;
+    NSArray *matches = [context executeFetchRequest:fetchRequest error:&error];
+    
+    if (error) NSLog(@"error when retrieving city entities %@", error);
+    
+    if (matches) Log(@"%d", [matches count]);
+    
+    return matches;
 }
 
 @end

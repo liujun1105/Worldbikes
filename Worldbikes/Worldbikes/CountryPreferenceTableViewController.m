@@ -6,16 +6,14 @@
 //  Copyright (c) 2012 Ericsson Software Campus. All rights reserved.
 //
 
-#import "CountrySettingTableViewController.h"
-#import "XMLParserDelegate.h"
-#import "CitySettingViewController.h"
+#import "CountryPreferenceTableViewController.h"
 
-@interface CountrySettingTableViewController ()
+@interface CountryPreferenceTableViewController ()
 
 @end
 
-@implementation CountrySettingTableViewController
-@synthesize countrySettingModel = _settingModel;
+@implementation CountryPreferenceTableViewController
+@synthesize preference = _preference;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -32,7 +30,7 @@
     dispatch_queue_t downloadQ = dispatch_queue_create("Bycicle Scheme Supported Countries Download", NULL);
     dispatch_async(downloadQ, ^{
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.countrySettingModel setup];
+            [self.preference setup];
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:FALSE];
         });
     });
@@ -48,10 +46,8 @@
 
 - (void)viewDidUnload
 {
-    [self setCountrySettingModel:nil];
+    [self setPreference:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -69,7 +65,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    return [self.countrySettingModel countrySize];
+    return [self.preference countrySize];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -78,7 +74,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     
-    cell.textLabel.text = [self.countrySettingModel nameOfCountryAtIndex:indexPath.row];
+    cell.textLabel.text = [self.preference nameOfCountryAtIndex:indexPath.row];
     
     return cell;
 }
@@ -86,11 +82,11 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
      NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-    
-    CitySettingViewController *citySettingViewController = [segue destinationViewController];
-    [citySettingViewController setCountryName:[self.countrySettingModel nameOfCountryAtIndex:indexPath.row]];
+        
+    CityPreferenceTableViewController *citySettingViewController = [segue destinationViewController];
+    [citySettingViewController setCountryName:[self.preference nameOfCountryAtIndex:indexPath.row]];
     [citySettingViewController setCountryIndex:indexPath.row];
-    [citySettingViewController setCitySettingModel:self.countrySettingModel];
+    [citySettingViewController setPreference:self.preference];
 }
 
 /*

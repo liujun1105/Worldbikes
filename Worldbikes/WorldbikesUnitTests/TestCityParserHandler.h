@@ -8,6 +8,6 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-@interface TestXMLParser : SenTestCase
+@interface TestCityParserHandler : SenTestCase
 
 @end

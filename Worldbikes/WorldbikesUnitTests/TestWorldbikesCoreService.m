@@ -12,47 +12,38 @@
 #import "CountryDAO.h"
 #import "CityDAO.h"
 #import "WorldbikesCoreService.h"
+#import "ModelContextTestDelegate.h"
 
 @interface TestWorldbikesCoreService ()
-@property (nonatomic,strong) NSManagedObjectModel *model;
-@property (nonatomic,strong) NSPersistentStoreCoordinator *coordinator;
-@property (nonatomic,strong) NSManagedObjectContext *context;
 @property (nonatomic,strong) CountryDAO *countryDAO;
 @property (nonatomic,strong) CityDAO *cityDAO;
 @property (nonatomic,strong) WorldbikesCoreService *coreService;
 @property (nonatomic,strong) NSString *cityName;
 @property (nonatomic,strong) NSString *countryName;
-
+@property (nonatomic,strong) ModelContextTestDelegate *delegate;
 @end
 
 @implementation TestWorldbikesCoreService
 @synthesize countryDAO = _countryDAO;
 @synthesize cityDAO = _cityDAO;
 @synthesize coreService = _coreService;
-@synthesize model = _model;
-@synthesize coordinator = _coordinator;
-@synthesize context = _context;
 @synthesize cityName = _cityName;
 @synthesize countryName = _countryName;
+@synthesize delegate = _delegate;
 
 - (void) setUp
 {
     self.countryName = @"Ireland";
     self.cityName = @"Dublin";
-    self.model = [NSManagedObjectModel mergedModelFromBundles:[NSBundle allBundles]];
-    self.coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.model];
-    self.context = [[NSManagedObjectContext alloc] init];
-    self.context.persistentStoreCoordinator = self.coordinator;
     self.countryDAO = [[CountryDAO alloc] init];
     self.cityDAO = [[CityDAO alloc] init];
     self.coreService = [[WorldbikesCoreService alloc] init];
+    self.delegate = [[ModelContextTestDelegate alloc] init];
+//    self.coreService.delegate = self.delegate;
 }
 
 - (void) tearDown
 {
-    [self setModel:nil];
-    [self setContext:nil];
-    [self setCoordinator:nil];
     [self setCountryDAO:nil];
     [self setCityDAO:nil];
     [self setCoreService:nil];
@@ -60,10 +51,10 @@
 
 - (void) testCoreService_AddCityToCountry
 {
-    City *city = [self.coreService addCity:self.cityName toCountry:self.countryName inManagedObjectContext:self.context];
+    City *city = [self.coreService addCity:self.cityName withURLPath:nil toCountry:self.countryName];
     STAssertNotNil(city, @"failed to add city using WorldbikesCoreService");
     
-    int numberOfCountries = [self.countryDAO numberOfCountryInManagedObjectContext:self.context];    
+    int numberOfCountries = [self.countryDAO numberOfCountryInManagedObjectContext:[self.delegate managedObjectContext]];    
     STAssertEquals(numberOfCountries, 1, @"failed to create country object using WorldbikesCoreService");
     
     STAssertNotNil([city country], @"city-country mapping is not setup");
@@ -72,34 +63,52 @@
 
 - (void) testCoreService_RemoveCity
 {
-    [self.coreService addCity:self.cityName toCountry:self.countryName inManagedObjectContext:self.context];
-    [self.coreService addCity:@"Athlone" toCountry:self.countryName inManagedObjectContext:self.context];
+    [self.coreService addCity:self.cityName withURLPath:nil toCountry:self.countryName];
+    [self.coreService addCity:@"Athlone" withURLPath:nil toCountry:self.countryName];
     
-    Country *country = [self.countryDAO country:self.countryName inManagedObjectContext:self.context];
+    Country *country = [self.countryDAO country:self.countryName inManagedObjectContext:[self.delegate managedObjectContext]];
     
     STAssertTrue([country.cities count] == 2, @"incorrect number of cities");
     
-    [self.coreService removeCity:self.cityName inManagedObjectContext:self.context];
+    [self.coreService removeCity:self.cityName];
     
     STAssertTrue([country.cities count] == 1, @"incorrect number of cities");
 }
 
 - (void) testCoreService_RemoveAllCities
 {
-    [self.coreService addCity:self.cityName toCountry:self.countryName inManagedObjectContext:self.context];
-    [self.coreService addCity:@"Athlone" toCountry:self.countryName inManagedObjectContext:self.context];
+    [self.coreService addCity:self.cityName withURLPath:nil toCountry:self.countryName];
+    [self.coreService addCity:@"Athlone" withURLPath:nil toCountry:self.countryName];
     
-    Country *country = [self.countryDAO country:self.countryName inManagedObjectContext:self.context];
+    Country *country = [self.countryDAO country:self.countryName inManagedObjectContext:[self.delegate managedObjectContext]];
     
     STAssertTrue([country.cities count] == 2, @"incorrect number of cities");
     
-    [self.coreService removeCity:self.cityName inManagedObjectContext:self.context];
-    [self.coreService removeCity:@"Athlone" inManagedObjectContext:self.context];
+    [self.coreService removeCity:self.cityName];
+    [self.coreService removeCity:@"Athlone"];
     
     STAssertTrue([country.cities count] == 0, @"incorrect number of cities");
     
-    country = [self.countryDAO country:self.countryName inManagedObjectContext:self.context];
+    country = [self.countryDAO country:self.countryName inManagedObjectContext:[self.delegate managedObjectContext]];
     STAssertNil(country, @"");
+}
+
+- (void) testCoreService_UserCities
+{
+    [self.cityDAO addCity:self.cityName withUrlPath:nil inManagedObjectContext:[self.delegate managedObjectContext]];
+    [self.cityDAO addCity:@"Athlone" withUrlPath:nil inManagedObjectContext:[self.delegate managedObjectContext]];
+    [self.cityDAO addCity:@"Shanghai" withUrlPath:nil inManagedObjectContext:[self.delegate managedObjectContext]];
+    [self.cityDAO addCity:@"Paris" withUrlPath:nil inManagedObjectContext:[self.delegate managedObjectContext]];
+    
+    NSArray *cityNames = [self.coreService userCities];
+    
+    STAssertTrue([cityNames count]==4, @"incorrect number of cities added");
+    
+    int index=0;
+    for (NSString *cityName in cityNames) {
+        STAssertNotNil(cityName, @"index [%d] is nil", index);
+        index++;
+    }    
 }
 
 @end

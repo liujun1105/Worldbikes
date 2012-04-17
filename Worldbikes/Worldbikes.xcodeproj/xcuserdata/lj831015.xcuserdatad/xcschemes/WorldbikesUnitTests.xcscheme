@@ -33,6 +33,30 @@
                <Test
                   Identifier = "TestSettingModel">
                </Test>
+               <Test
+                  Identifier = "TestCityDAO">
+               </Test>
+               <Test
+                  Identifier = "TestCountryDAO">
+               </Test>
+               <Test
+                  Identifier = "TestCityParserHandler">
+               </Test>
+               <Test
+                  Identifier = "TestRealtimeInfoParserHandler">
+               </Test>
+               <Test
+                  Identifier = "TestStationParserHandler">
+               </Test>
+               <Test
+                  Identifier = "TestWorldbikesCoreService">
+               </Test>
+               <Test
+                  Identifier = "TestWorldbikesPreferenceModel">
+               </Test>
+               <Test
+                  Identifier = "TestXMLCrawler">
+               </Test>
             </SkippedTests>
          </TestableReference>
       </Testables>

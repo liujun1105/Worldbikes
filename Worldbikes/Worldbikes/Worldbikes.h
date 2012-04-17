@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #define CORE_DATA_DOCUMENT @"Worldbikes_CoreData"
+#define Log(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 
 @protocol Worldbikes <NSObject>
 

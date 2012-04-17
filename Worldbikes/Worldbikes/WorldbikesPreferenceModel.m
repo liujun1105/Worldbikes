@@ -6,35 +6,37 @@
 //  Copyright (c) 2012 Ericsson Software Campus. All rights reserved.
 //
 
-#import "SettingModel.h"
-#import "DefaultXMLParserDelegate.h"
+#import "WorldbikesPreferenceModel.h"
+#import "CityParserHandler.h"
 #import "XObjCity.h"
 #import "XObjCountry.h"
 #import "XMLCrawler.h"
+#import "City.h"
+#import "Station.h"
+#import "WorldbikesCoreService.h"
 
-@interface SettingModel ()
+@interface WorldbikesPreferenceModel ()
 @property (nonatomic,strong) NSArray *countries;
-
+@property (nonatomic,readonly) WorldbikesCoreService *coreService;
 @end
 
-@implementation SettingModel
+@implementation WorldbikesPreferenceModel
 @synthesize countries = _countries;
+@synthesize coreService = _coreService;
+
+- (id) init
+{
+    self = [super init];
+    if (self) {
+        self->_coreService = [WorldbikesPreferenceModel CoreService];
+    }
+    return self;
+}
 
 - (void) setup
 {
-    XMLCrawler *xmlCrawler = [[XMLCrawler alloc] init];
-    NSURL *url = [NSURL URLWithString:@"http://www.drpangpang.com/worldbikes.xml"];    
-    NSXMLParser *parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
-    DefaultXMLParserDelegate *parserDelegate = [[DefaultXMLParserDelegate alloc] init];
-    parser.delegate = parserDelegate;
-    parserDelegate.crawlerDelegate = xmlCrawler;
-    
-    BOOL status = [parser parse];
-    if (!status) {
-        NSLog(@"failed to parse the XML specified");
-    }
-    
-    self.countries = [NSArray arrayWithArray:[xmlCrawler data]];
+    NSURL *url = [NSURL URLWithString:@"http://www.drpangpang.com//worldbikes.xml"];
+    self.countries = [self bicycleSchemes:url];
 }
 
 - (int) indexOfCountry:(NSString*) countryName
@@ -102,6 +104,51 @@
     XObjCountry *country = [self.countries objectAtIndex:countryIndex];
     XObjCity *city = [country.cities objectAtIndex:cityIndex];
     return city.cityName;
+}
+
+- (NSString*) urlOfCityAtIndex:(int) cityIndex ofcountryAtIndex:(int) countryIndex
+{
+    XObjCountry *country = [self.countries objectAtIndex:countryIndex];
+    XObjCity *city = [country.cities objectAtIndex:cityIndex];
+    return city.url;
+}
+
+- (City *) addCity:(NSString*) cityName withURLPath:(NSString*) url toCountry:(NSString*) countryName
+{
+    return [self.coreService addCity:cityName withURLPath:url toCountry:countryName];
+}
+
+- (void) removeCity:(NSString*) cityName
+{
+    [self.coreService removeCity:cityName];
+}
+
+- (void) downloadStationDataOfCity:(NSString *) cityName
+{
+    
+    City *city = [self.coreService city:cityName];
+    
+    assert(nil != city);
+    
+    NSArray *stationData = [self stationDataForMapAnnotation:[WorldbikesCoreService fullUrlPath:city.url]];
+    for (NSDictionary *stationDict in stationData) {            
+        assert(nil != stationDict);
+        Station *station = [self.coreService addStation:stationDict];
+        assert(nil != station);
+        [city addStationsObject:station];
+        assert(nil != station.city);
+    }
+}    
+
+- (void) removeStationDataOfCity:(NSString *) cityName
+{
+    /* is it save to do this?? is NSArray sychronised save?? */
+    
+    NSArray *stations = [self.coreService allStationsInCity:cityName];
+   
+    for (Station *station in stations) {
+        [self.coreService deleteStation:[station.stationID intValue] inCity:cityName];
+    }
 }
 
 @end

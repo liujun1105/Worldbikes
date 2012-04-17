@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-#define METERS_PER_MILE 1609.344
+@class WorldbikesFavouriteModel;
+@class WorldbikesCoreServiceModel;
 
-@interface WorldbikesMapViewController : UIViewController
+@interface WorldbikesMapViewController : UIViewController<MKMapViewDelegate,CLLocationManagerDelegate>
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
+@property (strong, nonatomic) IBOutlet WorldbikesCoreServiceModel *coreServiceModel;
+@property (strong, nonatomic) IBOutlet WorldbikesFavouriteModel *favouriteModel;
 
 @end

@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XMLCrawlerDelegate.h"
 
-@protocol WorldbikesParserHandler <NSObject>
+@protocol WorldbikesParserHandler <NSXMLParserDelegate>
+
+@property id <XMLCrawlerDelegate> crawlerDelegate;
 
 @end

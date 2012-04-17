@@ -10,4 +10,8 @@
 
 @interface WorldbikesFavouriteModel : WorldbikesCoreServiceModel
 
+- (BOOL) addToFavouriteListOfStation:(int)stationID inCity:(NSString *) cityName;
+- (BOOL) removeFromFavouriteListOfStation:(int)stationID inCity:(NSString *) cityName;
+- (BOOL) isFavouriteStation:(int) stationID ofCity:(NSString *) cityName;
+
 @end

@@ -9,5 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface XObjStation : NSObject
+@property (nonatomic) int stationID;
+@property (nonatomic) double stationLatitude;
+@property (nonatomic) double stationLongitude;
 
+@property (nonatomic,strong) NSString *stationName;
+@property (nonatomic,strong) NSString *stationAddress;
+@property (nonatomic,strong) NSString *stationFullAddress;
 @end

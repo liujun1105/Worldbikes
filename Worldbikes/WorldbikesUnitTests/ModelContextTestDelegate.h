@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WorldbikesModelContextDelegate.h"
 
-@interface ModelContextTestDelegate : NSObject
+@interface ModelContextTestDelegate : NSObject <WorldbikesModelContextDelegate>
+
+- (NSManagedObjectContext*) managedObjectContext;
 
 @end

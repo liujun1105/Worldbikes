@@ -7,7 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 
-@interface WorldbikesStationAnnotation : NSObject
+@interface WorldbikesStationAnnotation : NSObject <MKAnnotation>
+
+@property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
+@property (nonatomic, copy) NSString *title, *subtitle;
+
+@property (nonatomic, copy) NSString *stationName;
+@property (nonatomic) int stationID;
+@property (nonatomic, copy) NSString *stationAddress;
+@property (nonatomic, copy) NSString *stationFullAddress;
+@property (nonatomic, copy) NSString *cityName;
+
+@property (nonatomic) BOOL isFavourite;
+
+- (id)initWithLocation:(CLLocationCoordinate2D) cood;
 
 @end

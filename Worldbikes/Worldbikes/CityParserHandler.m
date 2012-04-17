@@ -6,18 +6,18 @@
 //  Copyright (c) 2012 Ericsson Software Campus. All rights reserved.
 //
 
-#import "DefaultXMLParserDelegate.h"
+#import "CityParserHandler.h"
 #import "XObjCity.h"
 #import "XObjCountry.h"
 
-@interface DefaultXMLParserDelegate ()
+@interface CityParserHandler ()
 @property (nonatomic,strong) NSMutableArray *countries;
 @property (nonatomic,strong) NSMutableArray *cities;
 @property (nonatomic,strong) NSMutableString *characters;
 
 @end
 
-@implementation DefaultXMLParserDelegate
+@implementation CityParserHandler
 @synthesize countries = _countries;
 @synthesize cities = _cities;
 @synthesize characters = _characters;
@@ -31,6 +31,7 @@
     self.characters = [NSMutableString string];
 }
 
+
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
     NSLog(@"end parsing xml document");
@@ -39,9 +40,7 @@
 }
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict
-{
-//    NSLog(@"start element -> %@", elementName);
-    
+{    
     if ([elementName isEqualToString:@"country"]) {
         [self.countries addObject:[[XObjCountry alloc] init]];
     }
@@ -52,7 +51,6 @@
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
 {
-//    NSLog(@"end element -> %@", elementName);
     if ([elementName isEqualToString:@"country_name"]) {
         XObjCountry *country = [self.countries lastObject];
         country.countryName = [NSString stringWithString:self.characters];

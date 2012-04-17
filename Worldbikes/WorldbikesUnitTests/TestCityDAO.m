@@ -10,6 +10,7 @@
 #import "City+CRUD.h"
 #import "Country+CRUD.h"
 #import "CityDAO.h"
+#import <CoreData/CoreData.h>
 
 @interface TestCityDAO ()
 
@@ -52,14 +53,14 @@
 
 - (void) testCityDAO_AddCity
 {
-    City *city = [self.cityDAO addCity:self.cityName inManagedObjectContext:self.context];
+    City *city = [self.cityDAO addCity:self.cityName withUrlPath:nil inManagedObjectContext:self.context];
     STAssertNotNil(city, @"city object initialisation failed");
     STAssertNil(city.country, @"");
 }
 
 - (void) testCityDAO_DeleteCity
 {
-    City *city = [self.cityDAO addCity:self.cityName inManagedObjectContext:self.context];
+    City *city = [self.cityDAO addCity:self.cityName withUrlPath:nil inManagedObjectContext:self.context];
     
     city = [self.cityDAO city:self.cityName inManagedObjectContext:self.context];
     STAssertNotNil(city, [NSString stringWithFormat:@"city %@ not found", self.cityName]);
@@ -73,7 +74,7 @@
 {
     Country *country = [NSEntityDescription insertNewObjectForEntityForName:@"Country" inManagedObjectContext:self.context];
     country.countryName = self.countryName;
-    City *city = [self.cityDAO addCity:self.cityName inManagedObjectContext:self.context];
+    City *city = [self.cityDAO addCity:self.cityName withUrlPath:nil inManagedObjectContext:self.context];
     [country addCitiesObject:city];
     
     STAssertTrue([country.cities count] == 1, @"Country %@ should has %@", self.countryName, self.cityName);
@@ -95,7 +96,7 @@
 {
     Country *country = [NSEntityDescription insertNewObjectForEntityForName:@"Country" inManagedObjectContext:self.context];
     country.countryName = self.countryName;
-    City *city = [self.cityDAO addCity:self.cityName inManagedObjectContext:self.context];
+    City *city = [self.cityDAO addCity:self.cityName withUrlPath:nil inManagedObjectContext:self.context];
     
     NSString *countryOfCity = [self.cityDAO countryOfCity:self.cityName inManagedObjectContext:self.context];
     STAssertNil(countryOfCity, @"");
@@ -104,6 +105,17 @@
     
     countryOfCity = [self.cityDAO countryOfCity:self.cityName inManagedObjectContext:self.context];
     STAssertTrue([countryOfCity isEqualToString:country.countryName], @"country name [%@] [%@] does not match", countryOfCity, country.countryName);
+}
+
+- (void) testCityDAO_GetAllCities
+{
+    [self.cityDAO addCity:self.cityName withUrlPath:nil inManagedObjectContext:self.context];
+    [self.cityDAO addCity:@"Athlone" withUrlPath:nil inManagedObjectContext:self.context];
+    [self.cityDAO addCity:@"Shanghai" withUrlPath:nil inManagedObjectContext:self.context];
+    [self.cityDAO addCity:@"Paris" withUrlPath:nil inManagedObjectContext:self.context];
+    
+    NSArray *cities = [self.cityDAO allCitiesInManagedObjectContext:self.context];
+    STAssertTrue([cities count]==4, @"incorrect number of cities added");
 }
 
 @end
