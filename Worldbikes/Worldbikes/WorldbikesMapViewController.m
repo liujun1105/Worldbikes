@@ -11,23 +11,25 @@
 #import "WorldbikesCoreServiceModel.h"
 #import "WorldbikesStationAnnotation.h"
 #import "DetailedStationViewController.h"
-#import "WorldbikesFavouriteModel.h"
+#import "WorldbikesFavoriteModel.h"
 
 @interface WorldbikesMapViewController ()
 
 @property (nonatomic,strong) CLLocationManager *locationManager;
 @property (nonatomic,retain) CLLocation* initialLocation;
 @property (nonatomic,strong) NSArray *cities;
-
+@property (nonatomic,strong) WorldbikesStationAnnotation *annotation;
 @end
 
 @implementation WorldbikesMapViewController
 @synthesize mapView = _mapView;
 @synthesize locationManager = _locationManager;
 @synthesize coreServiceModel = _coreServiceModel;
-@synthesize favouriteModel = _favouriteModel;
+@synthesize favoriteModel = _favoriteModel;
+@synthesize activityProgress = _activityProgress;
 @synthesize initialLocation = _initialLocation;
 @synthesize cities = _cities;
+@synthesize annotation = _annotation;
 
 - (void)setCities:(NSArray *)cities
 {
@@ -36,18 +38,35 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {      
-    NSLog(@"view will appear");
-    if (nil == self.locationManager) {
-        NSLog(@"initlise CLLocationManager");
-        self.locationManager = [[CLLocationManager alloc] init];
+// private method, which registers all observers;
+- (void) registerAsObserver 
+{
+    /* this obersver monitoring the status of the persist store, 
+     * whether it is opened or not */
+    [self.coreServiceModel addObserver:self 
+                            forKeyPath:@"isPersistStoreOpened" 
+                               options:NSKeyValueObservingOptionNew 
+                               context:nil];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath 
+                      ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([@"isPersistStoreOpened" isEqualToString:keyPath]) {
+        /* no longer need this observer */
+        [self.coreServiceModel removeObserver:self forKeyPath:@"isPersistStoreOpened"];
+        /* as the persist store is opened, 
+         * we can not read station informations from the persist store */
+        [self.activityProgress startAnimating];
+        [self loadAnnotationView];    
+        [self.activityProgress stopAnimating];
     }
-    
-    self.locationManager.delegate = self;
-    self.mapView.delegate = self;
-    
-    
-    [self loadAnnotationView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.activityProgress startAnimating];
+    [self loadAnnotationView];    
+    [self.activityProgress stopAnimating];
 }
 
 - (void)loadAnnotationView
@@ -70,7 +89,7 @@
             annotation.stationAddress = [stationDict valueForKey:@"stationAddress"];
             annotation.stationFullAddress = [stationDict valueForKey:@"stationFullAddress"];
             annotation.stationID = [[stationDict valueForKey:@"stationID"] intValue];
-            annotation.isFavourite = [self.favouriteModel isFavouriteStation:[[stationDict valueForKey:@"stationID"] intValue] 
+            annotation.isFavorite = [self.favoriteModel isFavoriteStation:[[stationDict valueForKey:@"stationID"] intValue] 
                                                                       ofCity:cityName];
             annotation.cityName = cityName;
             NSMutableString *title = [NSMutableString stringWithString:[stationDict valueForKey:@"stationName"]];
@@ -87,9 +106,30 @@
 {
     NSLog(@"view did load");
     [super viewDidLoad];
-        
-    //    if (![CLLocationManager locationServicesEnabled]) {
-    NSLog(@"location service not enabled");
+    
+    if (nil == self.locationManager) {
+        NSLog(@"initlise CLLocationManager");
+        self.locationManager = [[CLLocationManager alloc] init];
+    }
+    
+    self.locationManager.delegate = self;
+    self.mapView.delegate = self;
+    
+
+    [self.coreServiceModel setup];    
+    [self registerAsObserver];
+    
+    if (![CLLocationManager locationServicesEnabled]) {
+        NSLog(@"location service not enabled");
+        UIAlertView *alertView = [[UIAlertView alloc] 
+                                  initWithTitle:@"Warning" 
+                                  message:@"Location Service Not Enabled" 
+                                  delegate:self
+                                  cancelButtonTitle:@"OK" 
+                                  otherButtonTitles: nil];
+        [alertView setTag:-1];
+        [alertView show];
+    }
     MKCoordinateSpan span;
     span.latitudeDelta = 0.076614;
     span.longitudeDelta = 0.146599;
@@ -113,10 +153,11 @@
     [self setMapView:nil];
     [self setLocationManager:nil];
     [self setCoreServiceModel:nil];
-    [self setFavouriteModel:nil];
+    [self setFavoriteModel:nil];
     [self setCities:nil];
     [self setLocationManager:nil];
     [self setInitialLocation:nil];
+    [self setActivityProgress:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -126,19 +167,49 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma MKMapViewDelegate
+#pragma mark - View lifecycle
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ([alertView tag] == -1) {
+        if (buttonIndex == 0) {
+            // pop the top view controller, which is the current view controller
+            // and go back to the calculator interface
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+}
+
+#pragma mark - MKMapViewDelegate
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-    DetailedStationViewController *detailedViewController = [[DetailedStationViewController alloc] init];
-    
-    WorldbikesStationAnnotation *annotation = view.annotation;
-    NSDictionary *realtimeInfoDict = [self.coreServiceModel realtimeInfoOfStation:annotation.stationID inCity:annotation.cityName];
+//    DetailedStationViewController *detailedViewController = [[DetailedStationViewController alloc] init];
+//    
+//    WorldbikesStationAnnotation *annotation = view.annotation;
+//    NSDictionary *realtimeInfoDict = [self.coreServiceModel realtimeInfoOfStation:annotation.stationID inCity:annotation.cityName];
+//
+//    detailedViewController.favoriteModel = self.favoriteModel;
+//    detailedViewController.annotation = annotation;
+//    detailedViewController.realtimeInfoDict = realtimeInfoDict;
 
-    detailedViewController.favouriteModel = self.favouriteModel;
-    detailedViewController.annotation = annotation;
-    detailedViewController.realtimeInfoDict = realtimeInfoDict;
+    self.annotation = view.annotation;
+    [self performSegueWithIdentifier:@"DetailedStationInformation" sender:self];
+    
+//    [self.navigationController pushViewController:detailedViewController animated:YES];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"DetailedStationInformation"]) {
+        DetailedStationViewController *detailedViewController = [segue destinationViewController];
         
-    [self.navigationController pushViewController:detailedViewController animated:YES];
+        WorldbikesStationAnnotation *annotation = self.annotation;
+        NSDictionary *realtimeInfoDict = [self.coreServiceModel realtimeInfoOfStation:annotation.stationID inCity:annotation.cityName];
+        
+        detailedViewController.favoriteModel = self.favoriteModel;
+        detailedViewController.annotation = annotation;
+        detailedViewController.realtimeInfoDict = realtimeInfoDict;
+    }
+
 }
 
 - (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
@@ -172,11 +243,11 @@
     [gecoder reverseGeocodeLocation:userLocation.location completionHandler:^(NSArray *placemarks, NSError *error) {
         // load Station GPS coordinates, create a MKAnnotation for each station and 
         // add MKAnnotation to the MKMapView object
-        [self loadAnnotationView];
+//        [self loadAnnotationView];
     }];
 }
 
-#pragma cllocationdelegate
+#pragma mark - cllocationdelegate
 - (void)locationManager:(CLLocationManager *)manager
     didUpdateToLocation:(CLLocation *)newLocation
            fromLocation:(CLLocation *)oldLocation

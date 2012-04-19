@@ -14,8 +14,8 @@
 - (Country*) addCountry:(NSString*) countryName inManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Country"];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"countryName = %@", countryName];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"countryName" ascending:YES];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"countryName == %@", countryName];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"countryName" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
     fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
     NSError *error;
@@ -40,8 +40,8 @@
 
 - (int) numberOfCountryInManagedObjectContext:(NSManagedObjectContext *)context
 {
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Country"];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"countryName" ascending:YES];
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Country"]; 
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"countryName" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
     fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
     NSError *error;
@@ -55,8 +55,8 @@
 - (Country*) country:(NSString*) countryName inManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Country"];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"countryName = %@", countryName];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"countryName" ascending:YES];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"countryName == %@", countryName];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"countryName" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
     fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
     NSError *error;

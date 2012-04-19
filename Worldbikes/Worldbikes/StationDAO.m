@@ -30,7 +30,7 @@
 - (Station *) station:(int) stationID inCity:(NSString *) cityName inManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Station"];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"stationID = %d AND city.cityName = %@", stationID, cityName];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"stationID == %d AND city.cityName == %@", stationID, cityName];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"stationID" ascending:YES];
     fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
@@ -61,7 +61,7 @@
 - (NSArray *) allStationsInCity:(NSString *) cityName inManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Station"];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"city.cityName = %@", cityName];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"city.cityName == %@", cityName];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"stationID" ascending:YES];
     fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
@@ -73,10 +73,10 @@
     return matches;
 }
 
-- (BOOL) updateStation:(int) stationID inCity:(NSString *) cityName asFavourite:(BOOL) favourite inManagedObjectContext:(NSManagedObjectContext *)context
+- (BOOL) updateStation:(int) stationID inCity:(NSString *) cityName asFavorite:(BOOL) favorite inManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Station"];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"stationID = %d AND city.cityName = %@", stationID, cityName];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"stationID == %d AND city.cityName == %@", stationID, cityName];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"stationID" ascending:YES];
     fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
@@ -90,15 +90,15 @@
     }
     
     Station *station = [matches lastObject];
-    station.isFavourite = [NSNumber numberWithBool:favourite];
+    station.isFavorite = [NSNumber numberWithBool:favorite];
 
     return TRUE;
 }
 
-- (BOOL) isFavouriteStation:(int) stationID ofCity:(NSString *) cityName inManagedObjectContext:(NSManagedObjectContext *)context
+- (BOOL) isFavoriteStation:(int) stationID ofCity:(NSString *) cityName inManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Station"];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"stationID = %d AND city.cityName = %@", stationID, cityName];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"stationID == %d AND city.cityName == %@", stationID, cityName];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"stationID" ascending:YES];
     fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
@@ -110,7 +110,8 @@
     if (nil == matches) {
         return FALSE;
     }
-    return [[[matches lastObject] isFavourite] boolValue];
+    
+    return [[[matches lastObject] isFavorite] boolValue];
 }
 
 @end

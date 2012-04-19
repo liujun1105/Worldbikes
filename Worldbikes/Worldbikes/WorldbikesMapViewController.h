@@ -10,12 +10,13 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-@class WorldbikesFavouriteModel;
+@class WorldbikesFavoriteModel;
 @class WorldbikesCoreServiceModel;
 
 @interface WorldbikesMapViewController : UIViewController<MKMapViewDelegate,CLLocationManagerDelegate>
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) IBOutlet WorldbikesCoreServiceModel *coreServiceModel;
-@property (strong, nonatomic) IBOutlet WorldbikesFavouriteModel *favouriteModel;
+@property (strong, nonatomic) IBOutlet WorldbikesFavoriteModel *favoriteModel;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityProgress;
 
 @end

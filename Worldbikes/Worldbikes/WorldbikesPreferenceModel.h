@@ -27,5 +27,4 @@
 - (void) downloadStationDataOfCity:(NSString *) cityName;
 - (void) removeStationDataOfCity:(NSString *) cityName;
 
-
 @end

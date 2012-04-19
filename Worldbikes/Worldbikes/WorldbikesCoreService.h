@@ -1,5 +1,5 @@
 //
-//  WorldbikesCoreService.h
+//  ;
 //  Worldbikes
 //
 //  Created by a亲爱的 我自己 on 09/04/2012.
@@ -16,10 +16,6 @@
 
 @interface WorldbikesCoreService : NSObject
 
-
-- (void) addWorldbikesCoreServiceObserver:(id)observer selector:(SEL) selector name:(NSString*) name;
-- (void) removeWorldbikesCoreServiceObserver:(id)observer name:(NSString*)name;
-
 - (City *) addCity:(NSString*) cityName withURLPath:(NSString*) url toCountry:(NSString*) countryName;
 - (City *) city:(NSString*) cityName;
 - (void) removeCity:(NSString*) cityName;
@@ -33,13 +29,14 @@
 
 - (NSString*) realtimeInfoPathOfStation:(int) stationID inCity:(NSString*) cityName;
 
-- (BOOL) updateStation:(int) stationID inCity:(NSString*) cityName asFavourite:(BOOL) isFavourite;
-- (BOOL) isFavouriteStation:(int) stationID ofCity:(NSString *) cityName;
+- (BOOL) updateStation:(int) stationID inCity:(NSString*) cityName asFavorite:(BOOL) isFavorite;
+- (BOOL) isFavoriteStation:(int) stationID ofCity:(NSString *) cityName;
 
-- (void) persist;
+- (NSString*) fullUrlPath:(NSString*) partial;
+- (NSString*) fullRealtimeInfoUrlPath:(NSString*) partial ofStation:(int) stationID;
 
-+ (NSString*) fullUrlPath:(NSString*) partial;
-+ (NSString*) fullRealtimeInfoUrlPath:(NSString*) partial ofStation:(int) stationID;
+- (UIManagedDocument *) openPersistStore;
 
-
+- (id) fetchedResultsController;
+- (NSDictionary *) grabCellRelatedInfomationFrom:(id) data;
 @end

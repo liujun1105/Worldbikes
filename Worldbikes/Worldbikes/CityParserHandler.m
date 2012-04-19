@@ -76,14 +76,8 @@
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
     if ([[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] > 0) {
-//        NSLog(@"characters -> %@", string);
         [self.characters appendString:string];
     }
-}
-
-- (void)parser:(NSXMLParser *)parser foundCDATA:(NSData *)CDATABlock
-{
-    NSLog(@"%@", CDATABlock);
 }
 
 @end

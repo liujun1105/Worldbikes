@@ -17,7 +17,7 @@
 @synthesize subtitle = _subtitle;
 @synthesize coordinate = _coordinate;
 @synthesize cityName = _cityName;
-@synthesize isFavourite = _isFavourite;
+@synthesize isFavorite = _isFavorite;
 
 - (id) initWithLocation:(CLLocationCoordinate2D)cood
 {

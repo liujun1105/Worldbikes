@@ -7,7 +7,7 @@
 //
 
 #import "DetailedStationViewController.h"
-#import "WorldbikesFavouriteModel.h"
+#import "WorldbikesFavoriteModel.h"
 
 @interface DetailedStationViewController ()
 
@@ -26,32 +26,54 @@
 @synthesize city = _city;
 @synthesize realtimeInfoDict = _realtimeInfoDict;
 @synthesize annotation = _annotation;
-@synthesize favouriteModel = _favouriteModel;
+@synthesize favoriteModel = _favoriteModel;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {          
+    if (self) {        
+
     }
     return self;
 }
 
-- (IBAction)addToFavourite:(UIBarButtonItem *)sender
+- (void) stopAnimating:(NSNotification *) notification
 {
-    [self.savingProgress startAnimating];
-
-    [self.favouriteModel addToFavouriteListOfStation:[self.stationID.text intValue] inCity:self.city.text];
-    [self.navigationItem.rightBarButtonItem setTitle:@"Remove"];
+    NSLog(@"stop animating");
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
     [self.savingProgress stopAnimating];
+    [self.navigationItem setHidesBackButton:NO];
+    [self.navigationItem.rightBarButtonItem setEnabled:YES];
 }
 
-- (IBAction)removeFromFavourite:(UIBarButtonItem *)sender
+- (IBAction)addToFavorite:(UIBarButtonItem *)sender
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(stopAnimating:) 
+                                                 name:@"FavoriteListUpdated" 
+                                               object:nil];
     [self.savingProgress startAnimating];
-    [self.favouriteModel removeFromFavouriteListOfStation:[self.stationID.text intValue] inCity:self.city.text];    
-    [self.navigationItem.rightBarButtonItem setTitle:@"Add"];    
-    [self.savingProgress stopAnimating];    
+    [self.navigationItem setHidesBackButton:YES];
+    [self.navigationItem.rightBarButtonItem setEnabled:NO];
+    [self.favoriteModel addToFavoriteListOfStation:[self.stationID.text intValue] inCity:self.city.text];
+    [self.annotation setIsFavorite:YES];
+    [self.navigationItem.rightBarButtonItem setTitle:@"Remove"];
+}
+
+- (IBAction)removeFromFavorite:(UIBarButtonItem *)sender
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(stopAnimating:) 
+                                                 name:@"FavoriteListUpdated" 
+                                               object:nil];    
+    [self.savingProgress startAnimating];
+    [self.navigationItem setHidesBackButton:YES];
+    [self.navigationItem.rightBarButtonItem setEnabled:NO];    
+
+    [self.favoriteModel removeFromFavoriteListOfStation:[self.stationID.text intValue] inCity:self.city.text];  
+    [self.annotation setIsFavorite:NO];    
+    [self.navigationItem.rightBarButtonItem setTitle:@"Add"];     
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -62,6 +84,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    self.savingProgress = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.savingProgress.center = self.view.center;
     
     // Do any additional setup after loading the view from its nib.
     [self.city setText:self.annotation.cityName];
@@ -75,20 +100,20 @@
     self.availableBikes.text = [NSString stringWithFormat:@"%d", [[self.realtimeInfoDict valueForKey:@"available"] intValue]];
     self.total.text = [NSString stringWithFormat:@"%d", [[self.realtimeInfoDict valueForKey:@"total"] intValue]];
     
-    if (!self.annotation.isFavourite) {
+    if (!self.annotation.isFavorite) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Add" 
                                                                                   style:UIBarButtonSystemItemAdd 
                                                                                  target:self 
-                                                                                 action:@selector(addToFavourite:)];
+                                                                                 action:@selector(addToFavorite:)];
     }
     else {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Remove" 
                                                                                   style:UIBarButtonSystemItemUndo 
                                                                                  target:self 
-                                                                                 action:@selector(removeFromFavourite:)];
-    }
-    
+                                                                                 action:@selector(removeFromFavorite:)];
+    }    
 }
+
 
 - (void)viewDidUnload
 {
@@ -101,7 +126,7 @@
     [self setFreeStands:nil];
     [self setTotal:nil];
     [self setCity:nil];
-    [self setFavouriteModel:nil];
+    [self setFavoriteModel:nil];
     [self setSavingProgress:nil];
     [super viewDidUnload];
 }

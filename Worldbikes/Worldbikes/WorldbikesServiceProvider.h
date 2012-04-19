@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+@class WorldbikesCoreService;
 
 @interface WorldbikesServiceProvider : NSObject
-
++ (WorldbikesCoreService*) CoreService;
 @end

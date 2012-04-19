@@ -24,7 +24,7 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+
     }
     return self;
 }
@@ -58,8 +58,6 @@
 {
     [self setPreference:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -105,34 +103,76 @@
     if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
         cell.accessoryType = UITableViewCellAccessoryNone;
         
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:TRUE];
+        /*
+         * if a city is removed, the station informations are also deleted
+         */
+        
         dispatch_queue_t removeQ = dispatch_queue_create("Remove Stations", NULL);
         dispatch_async(removeQ, ^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"remove stations of city %@", cityName);
-//                [self.preference removeStationDataOfCity:cityName];
                 [self.preference removeCity:cityName];
-                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:FALSE];
             });
         });
         dispatch_release(removeQ);
     }
     else {
+        
+        /* 
+         * when new city is added, downloading station metadata for that city, e.g., geolocation data 
+         */
+        
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         NSString *url = [self.preference urlOfCityAtIndex:indexPath.row ofcountryAtIndex:self.countryIndex];
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:TRUE];
         dispatch_queue_t downloadQ = dispatch_queue_create("Download Stations", NULL);
         dispatch_async(downloadQ, ^{
-            dispatch_async(dispatch_get_main_queue(), ^{     
-                [self.preference addCity:cityName withURLPath:url toCountry:self.countryName];
-                NSLog(@"download stations of city %@", cityName);
-                [self.preference downloadStationDataOfCity:cityName];
+            dispatch_async(dispatch_get_main_queue(), ^{  
+                BOOL success = YES;
+                @try {
+                    [self.preference addCity:cityName withURLPath:url toCountry:self.countryName];
+                    NSLog(@"download stations of city %@", cityName);
+                    [self.preference downloadStationDataOfCity:cityName];
+                }
+                @catch (NSException *exception) {
+                    Log(@"%@", exception.reason);
+                    [self.preference removeCity:cityName];
+                    success = FALSE;
+                }
+                @finally {
+                    UIAlertView *alertView;
+                    if (success) {
+                        alertView = [[UIAlertView alloc] 
+                                                  initWithTitle:@"Station Data Download" 
+                                                  message:@"Data downloaded"
+                                                  delegate:self
+                                                  cancelButtonTitle:@"OK" 
+                                                  otherButtonTitles: nil];
+                        
+                    }
+                    else {
+                        alertView = [[UIAlertView alloc] 
+                                                  initWithTitle:@"Station Data Download"
+                                                  message:@"Download Failed"
+                                                  delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles: nil];
+                    }
+                    [alertView setTag:-1];
+                    [alertView show];
+                }
+                
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:FALSE];
             });
         });
         dispatch_release(downloadQ);
     }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
 }
 
 

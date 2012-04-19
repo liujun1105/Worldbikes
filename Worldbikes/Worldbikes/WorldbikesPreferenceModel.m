@@ -14,6 +14,7 @@
 #import "City.h"
 #import "Station.h"
 #import "WorldbikesCoreService.h"
+#import "WorldbikesServiceProvider.h"
 
 @interface WorldbikesPreferenceModel ()
 @property (nonatomic,strong) NSArray *countries;
@@ -28,7 +29,7 @@
 {
     self = [super init];
     if (self) {
-        self->_coreService = [WorldbikesPreferenceModel CoreService];
+        self->_coreService = [WorldbikesServiceProvider CoreService];
     }
     return self;
 }
@@ -130,7 +131,14 @@
     
     assert(nil != city);
     
-    NSArray *stationData = [self stationDataForMapAnnotation:[WorldbikesCoreService fullUrlPath:city.url]];
+    NSArray *stationData = [self stationDataForMapAnnotation:[self.coreService fullUrlPath:city.url]];
+    
+    if (nil == stationData) {
+        @throw [NSException exceptionWithName:@"DownloadStationDataFailedException" 
+                                       reason:@"Failed to retrieve/parse the XML document" 
+                                     userInfo:nil];
+    }
+    
     for (NSDictionary *stationDict in stationData) {            
         assert(nil != stationDict);
         Station *station = [self.coreService addStation:stationDict];
@@ -150,5 +158,6 @@
         [self.coreService deleteStation:[station.stationID intValue] inCity:cityName];
     }
 }
+
 
 @end

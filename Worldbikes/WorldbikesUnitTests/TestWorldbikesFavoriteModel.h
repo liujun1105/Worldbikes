@@ -1,5 +1,5 @@
 //
-//  TestWorldbikesFavouriteModel.h
+//  TestWorldbikesFavoriteModel.h
 //  Worldbikes
 //
 //  Created by a亲爱的 我自己 on 16/04/2012.
@@ -8,6 +8,6 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-@interface TestWorldbikesFavouriteModel : SenTestCase
+@interface TestWorldbikesFavoriteModel : SenTestCase
 
 @end

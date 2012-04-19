@@ -88,13 +88,13 @@
     
     STAssertNotNil(station.city, nil);
     
-    STAssertFalse([station.isFavourite boolValue], @"%d", station.isFavourite);
+    STAssertFalse([station.isFavorite boolValue], @"%d", station.isFavorite);
     
-    STAssertTrue([self.stationDAO updateStation:1 inCity:self.cityName asFavourite:YES inManagedObjectContext:self.context], nil);
+    STAssertTrue([self.stationDAO updateStation:1 inCity:self.cityName asFavorite:YES inManagedObjectContext:self.context], nil);
     
     station = [self.stationDAO station:1 inCity:self.cityName inManagedObjectContext:self.context];
     
-    STAssertTrue([station.isFavourite boolValue], @"%d", station.isFavourite);
+    STAssertTrue([station.isFavorite boolValue], @"%d", station.isFavorite);
 }
 
 @end

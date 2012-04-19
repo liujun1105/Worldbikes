@@ -1,5 +1,5 @@
 //
-//  WorldbikesFavouriteModel.h
+//  WorldbikesFavoriteModel.h
 //  Worldbikes
 //
 //  Created by a亲爱的 我自己 on 16/04/2012.
@@ -8,10 +8,13 @@
 
 #import "WorldbikesCoreServiceModel.h"
 
-@interface WorldbikesFavouriteModel : WorldbikesCoreServiceModel
+@interface WorldbikesFavoriteModel : WorldbikesCoreServiceModel
 
-- (BOOL) addToFavouriteListOfStation:(int)stationID inCity:(NSString *) cityName;
-- (BOOL) removeFromFavouriteListOfStation:(int)stationID inCity:(NSString *) cityName;
-- (BOOL) isFavouriteStation:(int) stationID ofCity:(NSString *) cityName;
+- (BOOL) addToFavoriteListOfStation:(int)stationID inCity:(NSString *) cityName;
+- (BOOL) removeFromFavoriteListOfStation:(int)stationID inCity:(NSString *) cityName;
+- (BOOL) isFavoriteStation:(int) stationID ofCity:(NSString *) cityName;
+
+- (id) fetchedResultsController;
+- (NSDictionary *) grabCellRelatedInfomationFrom:(id) data;
 
 @end

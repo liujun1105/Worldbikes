@@ -16,8 +16,8 @@
 - (City*) addCity:(NSString*) cityName withUrlPath:(NSString*) urlPath inManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"City"];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"cityName = %@", cityName];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"cityName" ascending:YES];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"cityName == %@", cityName];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"cityName" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
     fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
     NSError *error;
@@ -41,8 +41,8 @@
 - (City*) city:(NSString*) cityName inManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"City"];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"cityName = %@", cityName];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"cityName" ascending:YES];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"cityName == %@", cityName];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"cityName" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
     fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
     NSError *error;
@@ -83,7 +83,7 @@
 - (NSArray*) allCitiesInManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"City"];
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"cityName" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"cityName" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
     fetchRequest.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     
     NSError *error;

@@ -22,7 +22,6 @@
 @property (nonatomic,strong) CountryDAO *countryDAO;
 @property (nonatomic,strong) StationDAO *stationDAO;
 @property (nonatomic,strong) UIManagedDocument *document;
-@property (strong, nonatomic) NSNotificationCenter *center;
 @end
 
 @implementation WorldbikesCoreService
@@ -30,7 +29,6 @@
 @synthesize countryDAO = _countryDAO;
 @synthesize stationDAO = _stationDAO;
 @synthesize document = _document;
-@synthesize center = _center;
 
 - (id) init
 {
@@ -39,43 +37,44 @@
         self.cityDAO = [[CityDAO alloc] init];     
         self.countryDAO = [[CountryDAO alloc] init];
         self.stationDAO = [[StationDAO alloc] init];
-        self.center = [NSNotificationCenter defaultCenter];
     }
     return self;
 }
 
-- (void) savedNotification:(NSNotification *)notification
+- (UIManagedDocument *) openPersistStore
 {
-    NSLog(@"data saved");
-}
-
-- (void) openManagedDocument
-{
+    static UIManagedDocument *document;
+    
+    if (nil != document && document.documentState == UIDocumentStateNormal) {
+        return document;        
+    }
+    
     NSURL *url = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
     
     url = [url URLByAppendingPathComponent:CORE_DATA_DOCUMENT];
     
-    self.document = [[UIManagedDocument alloc] initWithFileURL:url];
-    assert(nil != self.document);
-
+    document = [[UIManagedDocument alloc] initWithFileURL:url];
+    assert(nil != document);
+    
     // whether the database already exists
     BOOL isDatabaseExist = [[NSFileManager defaultManager] fileExistsAtPath:[url path]];
     if (isDatabaseExist) {        
-        NSLog(@"core data document %@ already exists", self.document.fileURL);
-        if (self.document.documentState == UIDocumentStateClosed) {
+        NSLog(@"core data document %@ already exists", document.fileURL);
+        if (document.documentState == UIDocumentStateClosed) {
             NSLog(@"opening document");
-            [self.document openWithCompletionHandler:^(BOOL success){
+            [document openWithCompletionHandler:^(BOOL success){
                 if (success) {
-                    NSLog(@"%d, %d", self.document.documentState, UIDocumentStateNormal);
-                    NSLog(@"core data document exists, open it");
+                    [[NSNotificationCenter defaultCenter]
+                     postNotificationName:@"PersistStoreOpened" object:nil userInfo:nil];
                 }
                 else {
                     [NSException exceptionWithName:@"UIManagedDocumentStateError" reason:@"couldn't open core data document" userInfo:nil];
                 }
             }];
         }
-        else if (self.document.documentState == UIDocumentStateNormal) {
-            
+        else if (document.documentState == UIDocumentStateNormal) {
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"PersistStoreOpened" object:nil userInfo:nil];
         }
         else {
             @throw [NSException exceptionWithName:@"UIManagedDocumentStateError" reason:@"Unknown State" userInfo:nil];
@@ -83,9 +82,10 @@
     }
     else {
         NSLog(@"core data document does not exist");
-        [self.document saveToURL:self.document.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
+        [document saveToURL:document.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
             if (success) {
-                NSLog(@"create the database");
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"PersistStoreOpened" object:nil userInfo:nil];
             }
             else {
                 [NSException exceptionWithName:@"UIManagedDocumentStateError" reason:@"couldn't creae core data document" userInfo:nil];
@@ -93,12 +93,14 @@
         }];
     }
     
+    return document;
 }
+
 
 - (NSManagedObjectContext *) managedObjectContext
 {
     if (!self.document) {
-        [self openManagedDocument];
+        self.document = [self openPersistStore];
     }
     
     return [self.document managedObjectContext];
@@ -160,7 +162,7 @@
     return cityNames;
 }
 
-+ (NSString*) fullUrlPath:(NSString*) partial
+- (NSString*) fullUrlPath:(NSString*) partial
 {
     NSMutableString *urlPath = [NSMutableString stringWithString:@"https://abo-"];
     [urlPath appendString:partial];
@@ -168,7 +170,7 @@
     return urlPath;
 }
 
-+ (NSString*) fullRealtimeInfoUrlPath:(NSString*) partial ofStation:(int) stationID
+- (NSString*) fullRealtimeInfoUrlPath:(NSString*) partial ofStation:(int) stationID
 {
     NSMutableString *urlPath = [NSMutableString stringWithString:@"https://abo-"];
     [urlPath appendString:partial];
@@ -197,7 +199,7 @@
                                              station.stationFullAddress, @"stationFullAddress", 
                                              station.stationLatitude, @"stationLatitude",
                                              station.stationLongitude, @"stationLongitude",
-                                             station.isFavourite, @"isFavourite",
+                                             station.isFavorite, @"isFavorite",
                                              nil];
         [stationDic addObject:dict];
     }    
@@ -219,42 +221,52 @@
 - (NSString*) realtimeInfoPathOfStation:(int) stationID inCity:(NSString*) cityName
 {
     City *city = [self city:cityName];
-    NSString *realtimeInfoPath = [WorldbikesCoreService fullRealtimeInfoUrlPath:city.url ofStation:stationID];
-    NSLog(@"realtime infomation path -->> %@", realtimeInfoPath);
+    NSString *realtimeInfoPath = [self fullRealtimeInfoUrlPath:city.url ofStation:stationID];
     return realtimeInfoPath;
 }
 
-- (BOOL) updateStation:(int) stationID inCity:(NSString*) cityName asFavourite:(BOOL) isFavourite 
+- (void) didSaveCallback:(NSNotification *) notification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextDidSaveNotification object:[self managedObjectContext]];    
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:@"FavoriteListUpdated" object:nil userInfo:nil];
+}
+
+- (BOOL) updateStation:(int) stationID inCity:(NSString*) cityName asFavorite:(BOOL) isFavorite 
 {
     NSManagedObjectContext *context = [self managedObjectContext];
-    return [self.stationDAO updateStation:stationID inCity:cityName asFavourite:isFavourite inManagedObjectContext:context];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                    selector:@selector(didSaveCallback:)
+                        name:NSManagedObjectContextDidSaveNotification
+                      object:context];
+    return [self.stationDAO updateStation:stationID inCity:cityName asFavorite:isFavorite inManagedObjectContext:context];
 }
 
-- (BOOL) isFavouriteStation:(int) stationID ofCity:(NSString *) cityName
+- (BOOL) isFavoriteStation:(int) stationID ofCity:(NSString *) cityName
 {
     NSManagedObjectContext *context = [self managedObjectContext];
-    return [self.stationDAO isFavouriteStation:stationID ofCity:cityName inManagedObjectContext:context];
+    return [self.stationDAO isFavoriteStation:stationID ofCity:cityName inManagedObjectContext:context];
 }
 
-- (void) persist
+- (id) fetchedResultsController
 {
-    [[self managedObjectContext] processPendingChanges];
-    [[self managedObjectContext] save:nil];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Station"];
+    request.predicate = [NSPredicate predicateWithFormat:@"isFavorite == %@", [NSNumber numberWithBool:YES]];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"stationID" ascending:YES];
+    request.sortDescriptors = [NSArray arrayWithObject:sortDescriptor];    
+   
+    [request setFetchLimit:10];
+    return [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:[self managedObjectContext] sectionNameKeyPath:@"city.cityName" cacheName:@"FavoriteStationCache"];        
 }
 
-- (void) addWorldbikesCoreServiceObserver:(id)observer selector:(SEL) selector name:(NSString*) name
+- (NSDictionary *) grabCellRelatedInfomationFrom:(id) data
 {
-    [self.center addObserver:observer
-                    selector:selector
-                        name:name
-                      object:[self managedObjectContext]] ;
-}
-
-- (void) removeWorldbikesCoreServiceObserver:(id)observer name:(NSString*)name
-{
-    [self.center removeObserver:observer
-                           name:name 
-                         object:[self managedObjectContext]];
+    Station *station = data;
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                          [NSString stringWithFormat:@"%@ (%d)", station.stationName, [station.stationID intValue]], @"title", 
+                          station.stationFullAddress, @"detail",
+                          nil];
+    return dict;
 }
 
 @end

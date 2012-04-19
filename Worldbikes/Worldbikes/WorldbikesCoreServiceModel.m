@@ -15,28 +15,40 @@
 #import "XObjRealtimeInfo.h"
 #import "XObjStation.h"
 #import "Worldbikes.h"
+#import "WorldbikesServiceProvider.h"
+
+@interface WorldbikesCoreServiceModel ()
+@property (nonatomic,readonly) WorldbikesCoreService *coreService;
+@end
 
 @implementation WorldbikesCoreServiceModel
+@synthesize isPersistStoreOpened = _isPersistStoreOpened;
+@synthesize coreService = _coreService;
 
 - (id) init
 {
     self = [super init];
     if (self) {
-
+        self->_coreService = [WorldbikesServiceProvider CoreService];
     }
     return self;
 }
 
-+ (WorldbikesCoreService*) CoreService
+- (void) setup
 {
-    static WorldbikesCoreService *worldbikesCoreService;
-    
-    if (!worldbikesCoreService) {
-        NSLog(@"setup WorldbikesCoreService");
-        worldbikesCoreService = [[WorldbikesCoreService alloc] init];
-    }
-    
-    return worldbikesCoreService;
+    self.isPersistStoreOpened = NO;
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(persistStoreOpened:) 
+                                                 name:@"PersistStoreOpened" 
+                                               object:nil];
+    [self.coreService openPersistStore];
+}
+
+- (void) persistStoreOpened:(NSNotification *) notification
+{
+    NSLog(@"===== persist store opened successfully =====");
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PersistStoreOpened" object:nil];
+    self.isPersistStoreOpened = YES;
 }
 
 - (NSArray*) bicycleSchemes:(NSURL *)url
@@ -80,8 +92,6 @@
 
 - (NSArray*) stationDataForMapAnnotation:(NSString*) urlPath
 {    
-    NSLog(@"[%@]", urlPath);
-    
     NSURL *url = [NSURL URLWithString:urlPath];
     NSArray *array = [self stations:url];
     
@@ -106,17 +116,17 @@
 
 - (NSArray*) cityPreferences
 {
-    return [[WorldbikesCoreServiceModel CoreService] userCities];
+    return [self.coreService userCities];
 }
 
 - (NSArray*) allStationsInCity:(NSString*) cityName
 {
-    return [[WorldbikesCoreServiceModel CoreService] allStationsInCity:cityName];
+    return [self.coreService allStationsInCity:cityName];
 }
 
 - (NSDictionary*) realtimeInfoOfStation:(int) stationID inCity:(NSString*) cityName
 {
-    NSString *realtimeInfoPath = [[WorldbikesCoreServiceModel CoreService] realtimeInfoPathOfStation:stationID inCity:cityName];
+    NSString *realtimeInfoPath = [self.coreService realtimeInfoPathOfStation:stationID inCity:cityName];
     NSURL *url = [NSURL URLWithString:realtimeInfoPath];
     NSArray *realtimeInfos = [self realtimeInfo:url];
     

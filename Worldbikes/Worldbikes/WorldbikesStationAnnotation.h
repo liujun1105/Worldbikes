@@ -21,7 +21,7 @@
 @property (nonatomic, copy) NSString *stationFullAddress;
 @property (nonatomic, copy) NSString *cityName;
 
-@property (nonatomic) BOOL isFavourite;
+@property (nonatomic) BOOL isFavorite;
 
 - (id)initWithLocation:(CLLocationCoordinate2D) cood;
 

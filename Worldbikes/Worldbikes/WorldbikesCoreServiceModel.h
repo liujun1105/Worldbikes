@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@class WorldbikesCoreService;
 @class XObjRealtimeInfo;
 
 @interface WorldbikesCoreServiceModel : NSObject
 
-+ (WorldbikesCoreService*) CoreService;
+@property (nonatomic) BOOL isPersistStoreOpened;
+- (void) setup;
+
 - (NSArray*) bicycleSchemes:(NSURL *) url;
 - (NSArray*) stations:(NSURL *) url;
 - (NSArray*) realtimeInfo:(NSURL *) url;

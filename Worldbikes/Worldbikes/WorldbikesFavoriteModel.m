@@ -1,56 +1,65 @@
 //
-//  WorldbikesFavouriteModel.m
+//  WorldbikesFavoriteModel.m
 //  Worldbikes
 //
 //  Created by a亲爱的 我自己 on 16/04/2012.
 //  Copyright (c) 2012 Ericsson Software Campus. All rights reserved.
 //
 
-#import "WorldbikesFavouriteModel.h"
+#import "WorldbikesFavoriteModel.h"
 #import "WorldbikesCoreService.h"
 #import "Worldbikes.h"
+#import "WorldbikesServiceProvider.h"
 
-@interface WorldbikesFavouriteModel ()
+@interface WorldbikesFavoriteModel ()
 
 @property (nonatomic,readonly) WorldbikesCoreService *coreService;
 
 @end
 
-@implementation WorldbikesFavouriteModel
+@implementation WorldbikesFavoriteModel
 @synthesize coreService = _coreService;
 
 - (id) init
 {
     self = [super init];
     if (self) {
-        self->_coreService = [WorldbikesFavouriteModel CoreService];
+        self->_coreService = [WorldbikesServiceProvider CoreService];
     }
     return self;
 }
 
-- (BOOL) addToFavouriteListOfStation:(int)stationID inCity:(NSString *) cityName
+- (BOOL) addToFavoriteListOfStation:(int)stationID inCity:(NSString *) cityName
 {
-    BOOL isAdded = [self.coreService updateStation:stationID inCity:cityName asFavourite:YES];
+    BOOL isAdded = [self.coreService updateStation:stationID inCity:cityName asFavorite:YES];
     if (!isAdded) {
-        Log(@"failed to add station [%d] of city [%@] into favourite list", stationID, cityName);
+        Log(@"failed to add station [%d] of city [%@] into favorite list", stationID, cityName);
     }
-    [self.coreService persist];    
     return isAdded;
 }
 
-- (BOOL) removeFromFavouriteListOfStation:(int)stationID inCity:(NSString *) cityName
+- (BOOL) removeFromFavoriteListOfStation:(int)stationID inCity:(NSString *) cityName
 {
-    BOOL isRemoved = [self.coreService updateStation:stationID inCity:cityName asFavourite:NO];
+    BOOL isRemoved = [self.coreService updateStation:stationID inCity:cityName asFavorite:NO];
     if (!isRemoved) {
-        Log(@"failed to remove station [%d] of city [%@] into favourite list", stationID, cityName);
+        Log(@"failed to remove station [%d] of city [%@] into favorite list", stationID, cityName);
     }    
-    [self.coreService persist];
     return isRemoved;
 }
 
-- (BOOL) isFavouriteStation:(int) stationID ofCity:(NSString *) cityName
+- (BOOL) isFavoriteStation:(int) stationID ofCity:(NSString *) cityName
 {
-    return [self.coreService isFavouriteStation:stationID ofCity:cityName];
+    return [self.coreService isFavoriteStation:stationID ofCity:cityName];
+}
+
+- (id) fetchedResultsController
+{
+    return [self.coreService fetchedResultsController];
+}
+
+- (NSDictionary *) grabCellRelatedInfomationFrom:(id) data
+{
+    return [self.coreService grabCellRelatedInfomationFrom:data];
 }
 
 @end

@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "WorldbikesStationAnnotation.h"
+#import "DetailedStationTableView.h"
+@class WorldbikesFavoriteModel;
 
-@class WorldbikesFavouriteModel;
+@interface DetailedStationViewController : UITableViewController
 
-@interface DetailedStationViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *savingProgress;
 @property (strong, nonatomic) IBOutlet UILabel *stationID;
 @property (strong, nonatomic) IBOutlet UILabel *stationName;
 @property (strong, nonatomic) IBOutlet UILabel *stationLatitude;
@@ -23,8 +23,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *total;
 @property (strong, nonatomic) IBOutlet UILabel *city;
 
-@property (strong, nonatomic) WorldbikesFavouriteModel *favouriteModel;
-
+@property (strong, nonatomic) UIActivityIndicatorView *savingProgress;
+@property (strong, nonatomic) WorldbikesFavoriteModel *favoriteModel;
 @property (strong, nonatomic) WorldbikesStationAnnotation *annotation;
 @property (strong, nonatomic) NSDictionary *realtimeInfoDict;
 

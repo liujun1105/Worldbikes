@@ -15,7 +15,7 @@
 - (Station *) station:(int) stationID inCity:(NSString *) cityName inManagedObjectContext:(NSManagedObjectContext *)context;
 - (NSArray *) allStationsInCity:(NSString *) cityName inManagedObjectContext:(NSManagedObjectContext *)context;
 - (BOOL) deleteStation:(int) stationID inCity:(NSString *) cityName inManagedObjectContext:(NSManagedObjectContext *)context;
-- (BOOL) updateStation:(int) stationID inCity:(NSString *) cityName asFavourite:(BOOL) favourite inManagedObjectContext:(NSManagedObjectContext *)context;
-- (BOOL) isFavouriteStation:(int) stationID ofCity:(NSString *) cityName inManagedObjectContext:(NSManagedObjectContext *)context;
+- (BOOL) updateStation:(int) stationID inCity:(NSString *) cityName asFavorite:(BOOL) favorite inManagedObjectContext:(NSManagedObjectContext *)context;
+- (BOOL) isFavoriteStation:(int) stationID ofCity:(NSString *) cityName inManagedObjectContext:(NSManagedObjectContext *)context;
 
 @end

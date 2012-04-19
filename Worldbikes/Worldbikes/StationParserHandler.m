@@ -49,7 +49,6 @@
                 station.stationLongitude = [[attributeDict valueForKey:@"lng"] doubleValue];
         }
         [self.stations addObject:station];
-        NSLog(@"%@", station);
     }
     else if ([elementName isEqualToString:@"arrondissement"]) {
         for (NSString *key in attributeDict) {

@@ -1,5 +1,5 @@
 //
-//  FavouriteStationViewController.h
+//  FavoriteStationViewController.h
 //  Worldbikes
 //
 //  Created by a亲爱的 我自己 on 16/04/2012.
@@ -7,7 +7,9 @@
 //
 
 #import "CoreDataTableViewController.h"
+#import "WorldbikesFavoriteModel.h"
 
-@interface FavouriteStationViewController : CoreDataTableViewController
+@interface FavoriteStationViewController : CoreDataTableViewController
+@property (strong, nonatomic) IBOutlet WorldbikesFavoriteModel *favoriteModel;
 
 @end

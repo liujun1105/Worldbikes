@@ -1,21 +1,21 @@
 //
-//  TestWorldbikesFavouriteModel.m
+//  TestWorldbikesFavoriteModel.m
 //  Worldbikes
 //
 //  Created by a亲爱的 我自己 on 16/04/2012.
 //  Copyright (c) 2012 Ericsson Software Campus. All rights reserved.
 //
 
-#import "TestWorldbikesFavouriteModel.h"
-#import "WorldbikesFavouriteModel.h"
+#import "TestWorldbikesFavoriteModel.h"
+#import "WorldbikesFavoriteModel.h"
 #import "StationDAO.h"
 #import "Station.h"
 #import "City+CRUD.h"
 #import "CityDAO.h"
 #import <CoreData/CoreData.h>
 
-@interface TestWorldbikesFavouriteModel ()
-@property (nonatomic,strong) WorldbikesFavouriteModel *favouriteModel;
+@interface TestWorldbikesFavoriteModel ()
+@property (nonatomic,strong) WorldbikesFavoriteModel *favoriteModel;
 @property (nonatomic,strong) CityDAO *cityDAO;
 @property (nonatomic,strong) StationDAO *stationDAO;
 @property (nonatomic,strong) NSDictionary *stationDict;
@@ -24,8 +24,8 @@
 @property (nonatomic,strong) NSManagedObjectContext *context;
 @end
 
-@implementation TestWorldbikesFavouriteModel
-@synthesize favouriteModel = _favouriteModel;
+@implementation TestWorldbikesFavoriteModel
+@synthesize favoriteModel = _favoriteModel;
 @synthesize cityDAO = _cityDAO;
 @synthesize stationDAO = _stationDAO;
 @synthesize stationDict = _stationDict;
@@ -39,7 +39,7 @@
     self.coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.model];
     self.context = [[NSManagedObjectContext alloc] init];
     self.context.persistentStoreCoordinator = self.coordinator;
-    self.favouriteModel = [[WorldbikesFavouriteModel alloc] init];
+    self.favoriteModel = [[WorldbikesFavoriteModel alloc] init];
     self.stationDAO = [[StationDAO alloc] init];
     self.cityDAO = [[CityDAO alloc] init];
     self.stationDict = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -52,12 +52,12 @@
                         nil];
 }
 
-- (void) testWorldbikesFavouriteModel_Init
+- (void) testWorldbikesFavoriteModel_Init
 {
-    STAssertNotNil(self.favouriteModel, @"initialisation failure");
+    STAssertNotNil(self.favoriteModel, @"initialisation failure");
 }
 
-- (void) testWorldbikesFavouriteModel_AddStationToFavouriteList
+- (void) testWorldbikesFavoriteModel_AddStationToFavoriteList
 {
     City *city = [self.cityDAO addCity:@"Dublin" withUrlPath:nil inManagedObjectContext:self.context];
     STAssertNotNil(city, nil);
@@ -67,10 +67,10 @@
     station.city = city;
     
     STAssertNotNil(station.city, nil);    
-    STAssertFalse([station.isFavourite boolValue], @"%d", station.isFavourite);
+    STAssertFalse([station.isFavorite boolValue], @"%d", station.isFavorite);
     
-    [self.favouriteModel addToFavouriteListOfStation:1 inCity:@"Dublin"];
-    STAssertTrue([station.isFavourite boolValue], @"%d", station.isFavourite);
+    [self.favoriteModel addToFavoriteListOfStation:1 inCity:@"Dublin"];
+    STAssertTrue([station.isFavorite boolValue], @"%d", station.isFavorite);
 }
 
 @end
