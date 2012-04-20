@@ -1,5 +1,5 @@
 //
-//  DetailedStationTableView.h
+//  AlertViewController.h
 //  Worldbikes
 //
 //  Created by a亲爱的 我自己 on 19/04/2012.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DetailedStationTableView : UITableView
+@interface AlertViewController : UITableViewController
 
 @end
