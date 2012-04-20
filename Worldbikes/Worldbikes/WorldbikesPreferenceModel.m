@@ -119,10 +119,8 @@
     return [self.coreService addCity:cityName withURLPath:url toCountry:countryName];
 }
 
-- (void) removeCity:(NSString*) cityName
 - (BOOL) removeCity:(NSString*) cityName
 {
-    [self.coreService removeCity:cityName];
     return [self.coreService removeCity:cityName];
 }
 
@@ -133,7 +131,6 @@
     
     assert(nil != city);
     
-    NSArray *stationData = [self stationDataForMapAnnotation:[self.coreService fullUrlPath:city.url]];
     NSArray *stationData = [self stationDataForMapAnnotation:[WorldbikesCoreService fullUrlPath:city.url]];
     
     if (nil == stationData) {
