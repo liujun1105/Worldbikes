@@ -17,6 +17,6 @@
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) IBOutlet WorldbikesCoreServiceModel *coreServiceModel;
 @property (strong, nonatomic) IBOutlet WorldbikesFavoriteModel *favoriteModel;
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityProgress;
+
 
 @end

@@ -9,5 +9,8 @@
 #import "Station.h"
 
 @interface Station (CRUD)
-
+- (void)addAlertsObject:(Alert *)value;
+- (void)removeAlertsObject:(Alert *)value;
+- (void)addAlerts:(NSSet *)values;
+- (void)removeAlerts:(NSSet *)values;
 @end

@@ -62,4 +62,19 @@
     return [self.coreService grabCellRelatedInfomationFrom:data];
 }
 
+-(void) addAlertWithID:(NSString*) alertID andType:(NSString*) alertType toStation:(int) stationID inCity:(NSString*) cityName
+{
+    [self.coreService addAlertWithID:alertID andType:alertType toStation:stationID inCity:cityName];
+}
+
+-(BOOL) deleteAlertWithID:(NSString*) alertID andType:(NSString*) alertType
+{
+    return [self.coreService deleteAlertWithID:alertID andType:alertType];
+}
+
+-(BOOL) hasAlertSet:(NSString*) alertID
+{
+    return [self.coreService hasAlertSet:alertID];
+}
+
 @end

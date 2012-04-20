@@ -16,13 +16,14 @@
 #import "XObjStation.h"
 #import "Worldbikes.h"
 #import "WorldbikesServiceProvider.h"
+#import "WorldbikesAlertPool.h"
 
 @interface WorldbikesCoreServiceModel ()
 @property (nonatomic,readonly) WorldbikesCoreService *coreService;
 @end
 
 @implementation WorldbikesCoreServiceModel
-@synthesize isPersistStoreOpened = _isPersistStoreOpened;
+@synthesize isPersistentStoreOpened = _isPersistentStoreOpened;
 @synthesize coreService = _coreService;
 
 - (id) init
@@ -36,19 +37,19 @@
 
 - (void) setup
 {
-    self.isPersistStoreOpened = NO;
+    self.isPersistentStoreOpened = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self 
-                                             selector:@selector(persistStoreOpened:) 
-                                                 name:@"PersistStoreOpened" 
+                                             selector:@selector(persistentStoreOpened:) 
+                                                 name:@"PersistentStoreOpened" 
                                                object:nil];
-    [self.coreService openPersistStore];
+    [self.coreService openPersistentStore];
 }
 
-- (void) persistStoreOpened:(NSNotification *) notification
+- (void) persistentStoreOpened:(NSNotification *) notification
 {
     NSLog(@"===== persist store opened successfully =====");
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PersistStoreOpened" object:nil];
-    self.isPersistStoreOpened = YES;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PersistentStoreOpened" object:nil];
+    self.isPersistentStoreOpened = YES;
 }
 
 - (NSArray*) bicycleSchemes:(NSURL *)url
@@ -139,6 +140,17 @@
                                  [NSNumber numberWithInt:realtimeInfo.ticket], @"ticket",
                                  nil];
     return dict;
+}
+
+- (void) initAlertPoolWithDelegate;
+{
+    [self.coreService setupAlertPoolWithDelegate:self.coreService];
+    [self.coreService.alertPool start];
+}
+
+- (void) stopAlertPoolService
+{
+    self.coreService.stopAlertPool = YES;
 }
 
 @end

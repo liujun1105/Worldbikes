@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@class Alert;
 @protocol WorldbikesAlertPoolDelegate <NSObject>
 
+-(BOOL) stopAlertPool;
+-(BOOL) deleteAlertWithID:(NSString*) alertID andType:(NSString*) alertType;
 @end

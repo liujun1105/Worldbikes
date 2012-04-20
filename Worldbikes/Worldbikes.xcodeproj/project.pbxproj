@@ -37,8 +37,6 @@
 		43930BA71531F16B00865755 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43930BA51531F14A00865755 /* MapKit.framework */; };
 		43930BB815321D9F00865755 /* WorldbikesMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43930BB715321D9F00865755 /* WorldbikesMapViewController.m */; };
 		43930BBE15322CA200865755 /* CityPreferenceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43930BBD15322CA200865755 /* CityPreferenceTableViewController.m */; };
-		43939EDB153F6006008108C7 /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = 43939EDA153F6006008108C7 /* Station.m */; };
-		43939EDC153F6006008108C7 /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = 43939EDA153F6006008108C7 /* Station.m */; };
 		43939EE4153F720B008108C7 /* 72-pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 43939EE3153F720B008108C7 /* 72-pin.png */; };
 		43954466153B45F700532A2C /* DetailedStationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43954464153B45F600532A2C /* DetailedStationViewController.m */; };
 		43954D911533286B00D75702 /* TestCountryDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 43954D901533286B00D75702 /* TestCountryDAO.m */; };
@@ -94,7 +92,16 @@
 		43D58E22153B7F2C00922159 /* City+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D58E10153B606A00922159 /* City+CRUD.m */; };
 		43D58E23153B7F2C00922159 /* StationDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D58E13153B615000922159 /* StationDAO.m */; };
 		43D58E25153B822100922159 /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = 43D58E16153B7D6D00922159 /* Country.m */; };
-		43E79A73153F829A00B32DC1 /* DetailedStationTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E79A72153F829A00B32DC1 /* DetailedStationTableView.m */; };
+		43DD6CBC1540C70B008EC99A /* AlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DD6CBB1540C70B008EC99A /* AlertViewController.m */; };
+		43DD6CC61540DC35008EC99A /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DD6CC51540DC35008EC99A /* Station.m */; };
+		43DD6CC71540DC35008EC99A /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DD6CC51540DC35008EC99A /* Station.m */; };
+		43DD6CCA1540DC7C008EC99A /* Station+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DD6CC91540DC7C008EC99A /* Station+CRUD.m */; };
+		43DD6CCB1540DC7C008EC99A /* Station+CRUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DD6CC91540DC7C008EC99A /* Station+CRUD.m */; };
+		43DD6CCE1540DD66008EC99A /* AlertDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DD6CCD1540DD66008EC99A /* AlertDAO.m */; };
+		43DD6CCF1540DD66008EC99A /* AlertDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DD6CCD1540DD66008EC99A /* AlertDAO.m */; };
+		43DD6CDA1540E9DF008EC99A /* WorldbikesAlertPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DD6CD91540E9DE008EC99A /* WorldbikesAlertPool.m */; };
+		43DD6CDD1540ED34008EC99A /* Alert+EXT.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DD6CDC1540ED33008EC99A /* Alert+EXT.m */; };
+		43DD6CE115410211008EC99A /* Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DD6CE015410210008EC99A /* Alert.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,8 +135,6 @@
 		43930BB715321D9F00865755 /* WorldbikesMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldbikesMapViewController.m; sourceTree = "<group>"; };
 		43930BBC15322CA200865755 /* CityPreferenceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityPreferenceTableViewController.h; sourceTree = "<group>"; };
 		43930BBD15322CA200865755 /* CityPreferenceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityPreferenceTableViewController.m; sourceTree = "<group>"; };
-		43939ED9153F6006008108C7 /* Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Station.h; path = Worldbikes/Station.h; sourceTree = "<group>"; };
-		43939EDA153F6006008108C7 /* Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Station.m; path = Worldbikes/Station.m; sourceTree = "<group>"; };
 		43939EE3153F720B008108C7 /* 72-pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "72-pin.png"; path = "../../../../../../Downloads/glyphish-icons/icons/72-pin.png"; sourceTree = "<group>"; };
 		43954463153B45F600532A2C /* DetailedStationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailedStationViewController.h; sourceTree = "<group>"; };
 		43954464153B45F600532A2C /* DetailedStationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DetailedStationViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -206,8 +211,21 @@
 		43D58E16153B7D6D00922159 /* Country.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Country.m; path = Worldbikes/Country.m; sourceTree = "<group>"; };
 		43D58E1E153B7E6D00922159 /* TestStationDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestStationDAO.h; sourceTree = "<group>"; };
 		43D58E1F153B7E6D00922159 /* TestStationDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TestStationDAO.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		43E79A71153F829A00B32DC1 /* DetailedStationTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailedStationTableView.h; sourceTree = "<group>"; };
-		43E79A72153F829A00B32DC1 /* DetailedStationTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailedStationTableView.m; sourceTree = "<group>"; };
+		43DD6CBA1540C70B008EC99A /* AlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertViewController.h; sourceTree = "<group>"; };
+		43DD6CBB1540C70B008EC99A /* AlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertViewController.m; sourceTree = "<group>"; };
+		43DD6CC41540DC35008EC99A /* Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Station.h; path = Worldbikes/Station.h; sourceTree = "<group>"; };
+		43DD6CC51540DC35008EC99A /* Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Station.m; path = Worldbikes/Station.m; sourceTree = "<group>"; };
+		43DD6CC81540DC7C008EC99A /* Station+CRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Station+CRUD.h"; path = "Worldbikes/Station+CRUD.h"; sourceTree = "<group>"; };
+		43DD6CC91540DC7C008EC99A /* Station+CRUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Station+CRUD.m"; path = "Worldbikes/Station+CRUD.m"; sourceTree = "<group>"; };
+		43DD6CCC1540DD66008EC99A /* AlertDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlertDAO.h; path = Worldbikes/AlertDAO.h; sourceTree = "<group>"; };
+		43DD6CCD1540DD66008EC99A /* AlertDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlertDAO.m; path = Worldbikes/AlertDAO.m; sourceTree = "<group>"; };
+		43DD6CD81540E9DE008EC99A /* WorldbikesAlertPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorldbikesAlertPool.h; path = Worldbikes/WorldbikesAlertPool.h; sourceTree = "<group>"; };
+		43DD6CD91540E9DE008EC99A /* WorldbikesAlertPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorldbikesAlertPool.m; path = Worldbikes/WorldbikesAlertPool.m; sourceTree = "<group>"; };
+		43DD6CDB1540ED33008EC99A /* Alert+EXT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Alert+EXT.h"; path = "Worldbikes/Alert+EXT.h"; sourceTree = "<group>"; };
+		43DD6CDC1540ED33008EC99A /* Alert+EXT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Alert+EXT.m"; path = "Worldbikes/Alert+EXT.m"; sourceTree = "<group>"; };
+		43DD6CDE1540F0D0008EC99A /* WorldbikesAlertPoolDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorldbikesAlertPoolDelegate.h; path = Worldbikes/WorldbikesAlertPoolDelegate.h; sourceTree = "<group>"; };
+		43DD6CDF1541020F008EC99A /* Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Alert.h; path = Worldbikes/Alert.h; sourceTree = "<group>"; };
+		43DD6CE015410210008EC99A /* Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Alert.m; path = Worldbikes/Alert.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,6 +282,8 @@
 		43954DCA1533469500D75702 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				43DD6CC41540DC35008EC99A /* Station.h */,
+				43DD6CC51540DC35008EC99A /* Station.m */,
 				4396708C153CB3F4002492D4 /* CoreDataTableViewController.h */,
 				4396708D153CB3F4002492D4 /* CoreDataTableViewController.m */,
 				43954DB21533468900D75702 /* WorldbikesCoreService.h */,
@@ -272,8 +292,8 @@
 				43D58E16153B7D6D00922159 /* Country.m */,
 				4396709B153CC588002492D4 /* City.h */,
 				4396709C153CC588002492D4 /* City.m */,
-				43939ED9153F6006008108C7 /* Station.h */,
-				43939EDA153F6006008108C7 /* Station.m */,
+				43DD6CDF1541020F008EC99A /* Alert.h */,
+				43DD6CE015410210008EC99A /* Alert.m */,
 				43954DB41533468900D75702 /* WorldbikesModel.xcdatamodeld */,
 				43954DA61533468900D75702 /* CityDAO.h */,
 				43954DA71533468900D75702 /* CityDAO.m */,
@@ -285,6 +305,12 @@
 				43D58E10153B606A00922159 /* City+CRUD.m */,
 				43D58E12153B615000922159 /* StationDAO.h */,
 				43D58E13153B615000922159 /* StationDAO.m */,
+				43DD6CC81540DC7C008EC99A /* Station+CRUD.h */,
+				43DD6CC91540DC7C008EC99A /* Station+CRUD.m */,
+				43DD6CCC1540DD66008EC99A /* AlertDAO.h */,
+				43DD6CCD1540DD66008EC99A /* AlertDAO.m */,
+				43DD6CDB1540ED33008EC99A /* Alert+EXT.h */,
+				43DD6CDC1540ED33008EC99A /* Alert+EXT.m */,
 			);
 			name = "Core Data";
 			path = ..;
@@ -309,14 +335,14 @@
 				43967091153CBC50002492D4 /* FavoriteStationViewController.m */,
 				43954463153B45F600532A2C /* DetailedStationViewController.h */,
 				43954464153B45F600532A2C /* DetailedStationViewController.m */,
-				43E79A71153F829A00B32DC1 /* DetailedStationTableView.h */,
-				43E79A72153F829A00B32DC1 /* DetailedStationTableView.m */,
 				43930BBC15322CA200865755 /* CityPreferenceTableViewController.h */,
 				43930BBD15322CA200865755 /* CityPreferenceTableViewController.m */,
 				43930BB615321D9F00865755 /* WorldbikesMapViewController.h */,
 				43930BB715321D9F00865755 /* WorldbikesMapViewController.m */,
 				43930B821531B20000865755 /* CountryPreferenceTableViewController.h */,
 				43930B831531B20000865755 /* CountryPreferenceTableViewController.m */,
+				43DD6CBA1540C70B008EC99A /* AlertViewController.h */,
+				43DD6CBB1540C70B008EC99A /* AlertViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -449,6 +475,9 @@
 		439F1A97152BB602008845BE = {
 			isa = PBXGroup;
 			children = (
+				43DD6CDE1540F0D0008EC99A /* WorldbikesAlertPoolDelegate.h */,
+				43DD6CD81540E9DE008EC99A /* WorldbikesAlertPool.h */,
+				43DD6CD91540E9DE008EC99A /* WorldbikesAlertPool.m */,
 				439F1AAC152BB602008845BE /* Worldbikes */,
 				4369408A152F9977004562DA /* WorldbikesUnitTests */,
 				439F1AA5152BB602008845BE /* Frameworks */,
@@ -482,10 +511,10 @@
 		439F1AAC152BB602008845BE /* Worldbikes */ = {
 			isa = PBXGroup;
 			children = (
+				4306AD72153374CE0066E2D0 /* Worldbikes.h */,
 				43199E48153A270800B2B504 /* WorldbikesStationAnnotation.h */,
 				43199E49153A270900B2B504 /* WorldbikesStationAnnotation.m */,
 				43956C481534DE4C00F9CB4F /* Delegates */,
-				4306AD72153374CE0066E2D0 /* Worldbikes.h */,
 				43954DCD1533470B00D75702 /* Model */,
 				43954DCC153346EB00D75702 /* Controller */,
 				43954DCB153346B500D75702 /* XML */,
@@ -657,7 +686,9 @@
 				43967096153CC423002492D4 /* WorldbikesFavoriteModel.m in Sources */,
 				4396709E153CC588002492D4 /* City.m in Sources */,
 				43B95D99153CD59800F33185 /* TestWorldbikesFavoriteModel.m in Sources */,
-				43939EDC153F6006008108C7 /* Station.m in Sources */,
+				43DD6CC71540DC35008EC99A /* Station.m in Sources */,
+				43DD6CCB1540DC7C008EC99A /* Station+CRUD.m in Sources */,
+				43DD6CCF1540DD66008EC99A /* AlertDAO.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -695,8 +726,13 @@
 				43967095153CC423002492D4 /* WorldbikesFavoriteModel.m in Sources */,
 				4396709D153CC588002492D4 /* City.m in Sources */,
 				436DCCD2153E31180080AC40 /* WorldbikesServiceProvider.m in Sources */,
-				43939EDB153F6006008108C7 /* Station.m in Sources */,
-				43E79A73153F829A00B32DC1 /* DetailedStationTableView.m in Sources */,
+				43DD6CBC1540C70B008EC99A /* AlertViewController.m in Sources */,
+				43DD6CC61540DC35008EC99A /* Station.m in Sources */,
+				43DD6CCA1540DC7C008EC99A /* Station+CRUD.m in Sources */,
+				43DD6CCE1540DD66008EC99A /* AlertDAO.m in Sources */,
+				43DD6CDA1540E9DF008EC99A /* WorldbikesAlertPool.m in Sources */,
+				43DD6CDD1540ED34008EC99A /* Alert+EXT.m in Sources */,
+				43DD6CE115410211008EC99A /* Alert.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

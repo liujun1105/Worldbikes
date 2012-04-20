@@ -17,4 +17,7 @@
 - (id) fetchedResultsController;
 - (NSDictionary *) grabCellRelatedInfomationFrom:(id) data;
 
+-(void) addAlertWithID:(NSString*) alertID andType:(NSString*) alertType toStation:(int) stationID inCity:(NSString*) cityName;
+-(BOOL) deleteAlertWithID:(NSString*) alertID andType:(NSString*) alertType;
+-(BOOL) hasAlertSet:(NSString*) alertID;
 @end

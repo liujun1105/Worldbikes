@@ -11,7 +11,7 @@
 
 @interface CityPreferenceTableViewController ()
 @property (nonatomic,strong) NSArray *cities;
-
+@property (nonatomic,strong) UIActivityIndicatorView *activityIndicator;
 @end
 
 @implementation CityPreferenceTableViewController
@@ -19,6 +19,7 @@
 @synthesize countryName = _countryName;
 @synthesize countryIndex = _countryIndex;
 @synthesize cities = _cities;
+@synthesize activityIndicator = _activityIndicator;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -51,11 +52,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [self.view addSubview:self.activityIndicator];
+    self.activityIndicator.center = self.view.center;
 }
 
 
 - (void)viewDidUnload
 {
+    [self setActivityIndicator:nil];
     [self setPreference:nil];
     [super viewDidUnload];
 }
@@ -100,9 +105,13 @@
 {
     NSString *cityName = [self.preference nameOfCityAtIndex:indexPath.row OfCountryAtIndex:self.countryIndex];    
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        
+    
+
+    [self.activityIndicator setHidesWhenStopped:YES];
+    [self.activityIndicator startAnimating];
+    [self.navigationItem setHidesBackButton:YES];
+    
+    if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {        
         /*
          * if a city is removed, the station informations are also deleted
          */
@@ -111,7 +120,30 @@
         dispatch_async(removeQ, ^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"remove stations of city %@", cityName);
-                [self.preference removeCity:cityName];
+                UIAlertView *alertView;
+                BOOL success = [self.preference removeCity:cityName];
+                if (success) {
+                    cell.accessoryType = UITableViewCellAccessoryNone;
+                    /* this updates the MKAnnotationViews */
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"isPersistentStoreContentChanged" 
+                                                                        object:nil 
+                                                                      userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                                cityName, @"cityName", 
+                                                                                [NSNumber numberWithBool:YES], @"isForDeletion",
+                                                                                nil]];
+                }
+                else {
+                    alertView = [[UIAlertView alloc] 
+                                 initWithTitle:@"Remove City Preference"
+                                 message:@"Remove Failed"
+                                 delegate:self
+                                 cancelButtonTitle:@"OK"
+                                 otherButtonTitles: nil];
+                }
+                [alertView setTag:-1];
+                [alertView show];
+                [self.activityIndicator stopAnimating];
+                [self.navigationItem setHidesBackButton:NO];
             });
         });
         dispatch_release(removeQ);
@@ -122,7 +154,6 @@
          * when new city is added, downloading station metadata for that city, e.g., geolocation data 
          */
         
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
         NSString *url = [self.preference urlOfCityAtIndex:indexPath.row ofcountryAtIndex:self.countryIndex];
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:TRUE];
@@ -149,7 +180,16 @@
                                                   delegate:self
                                                   cancelButtonTitle:@"OK" 
                                                   otherButtonTitles: nil];
-                        
+
+                        // if success, update the cell
+                        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                        /* this updates the MKAnnotationViews */
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"isPersistentStoreContentChanged" 
+                                                                            object:nil 
+                                                                          userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                                    cityName, @"cityName", 
+                                                                                    [NSNumber numberWithBool:NO], @"isForDeletion",
+                                                                                    nil]];
                     }
                     else {
                         alertView = [[UIAlertView alloc] 
@@ -159,10 +199,11 @@
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles: nil];
                     }
-                    [alertView setTag:-1];
+                    [alertView setTag:-2];
                     [alertView show];
                 }
-                
+                [self.activityIndicator stopAnimating];
+                [self.navigationItem setHidesBackButton:NO];
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:FALSE];
             });
         });

@@ -15,13 +15,18 @@
 #import "CityDAO.h"
 #import "Station.h"
 #import "StationDAO.h"
+#import "Alert.h"
+#import "AlertDAO.h"
+#import "WorldbikesAlertPool.h"
 
 @interface WorldbikesCoreService ()
 
 @property (nonatomic,strong) CityDAO *cityDAO;
 @property (nonatomic,strong) CountryDAO *countryDAO;
 @property (nonatomic,strong) StationDAO *stationDAO;
+@property (nonatomic,strong) AlertDAO *alertDAO;
 @property (nonatomic,strong) UIManagedDocument *document;
+
 @end
 
 @implementation WorldbikesCoreService
@@ -29,6 +34,9 @@
 @synthesize countryDAO = _countryDAO;
 @synthesize stationDAO = _stationDAO;
 @synthesize document = _document;
+@synthesize alertDAO = _alertDAO;
+@synthesize alertPool = _alertPool;
+@synthesize stopAlertPool = _stopAlertPool;
 
 - (id) init
 {
@@ -37,11 +45,20 @@
         self.cityDAO = [[CityDAO alloc] init];     
         self.countryDAO = [[CountryDAO alloc] init];
         self.stationDAO = [[StationDAO alloc] init];
+        self.alertDAO = [[AlertDAO alloc] init];
+        
     }
     return self;
 }
 
-- (UIManagedDocument *) openPersistStore
+- (void) setupAlertPoolWithDelegate:(id) delegate
+{
+    self.stopAlertPool = NO;
+    self.alertPool = [[WorldbikesAlertPool alloc] init];
+    self.alertPool.delegate = delegate;
+}
+
+- (UIManagedDocument *) openPersistentStore
 {
     static UIManagedDocument *document;
     
@@ -65,7 +82,7 @@
             [document openWithCompletionHandler:^(BOOL success){
                 if (success) {
                     [[NSNotificationCenter defaultCenter]
-                     postNotificationName:@"PersistStoreOpened" object:nil userInfo:nil];
+                     postNotificationName:@"PersistentStoreOpened" object:nil userInfo:nil];
                 }
                 else {
                     [NSException exceptionWithName:@"UIManagedDocumentStateError" reason:@"couldn't open core data document" userInfo:nil];
@@ -74,7 +91,7 @@
         }
         else if (document.documentState == UIDocumentStateNormal) {
             [[NSNotificationCenter defaultCenter]
-             postNotificationName:@"PersistStoreOpened" object:nil userInfo:nil];
+             postNotificationName:@"PersistentStoreOpened" object:nil userInfo:nil];
         }
         else {
             @throw [NSException exceptionWithName:@"UIManagedDocumentStateError" reason:@"Unknown State" userInfo:nil];
@@ -85,7 +102,7 @@
         [document saveToURL:document.fileURL forSaveOperation:UIDocumentSaveForCreating completionHandler:^(BOOL success) {
             if (success) {
                 [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"PersistStoreOpened" object:nil userInfo:nil];
+                 postNotificationName:@"PersistentStoreOpened" object:nil userInfo:nil];
             }
             else {
                 [NSException exceptionWithName:@"UIManagedDocumentStateError" reason:@"couldn't creae core data document" userInfo:nil];
@@ -100,7 +117,7 @@
 - (NSManagedObjectContext *) managedObjectContext
 {
     if (!self.document) {
-        self.document = [self openPersistStore];
+        self.document = [self openPersistentStore];
     }
     
     return [self.document managedObjectContext];
@@ -123,6 +140,14 @@
     
     NSLog(@"%@,%@ added", city.cityName, country.countryName);
     
+//    /* this updates the MKAnnotationViews */
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"isPersistentStoreContentChanged" 
+//                                                        object:nil 
+//                                                      userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                                                cityName, @"cityName", 
+//                                                                [NSNumber numberWithBool:YES], @"isForDeletion",
+//                                                                nil]];
+    
     return city;
 }
 
@@ -131,13 +156,18 @@
     return [self.cityDAO city:cityName inManagedObjectContext:[self managedObjectContext]];
 }
 
-- (void) removeCity:(NSString*) cityName
+- (BOOL) removeCity:(NSString*) cityName
 {
     NSManagedObjectContext *context = [self managedObjectContext];
     assert(nil != context);
     
     NSString *countryName = [self.cityDAO countryOfCity:cityName inManagedObjectContext:context];
-    [self.cityDAO deleteCity:cityName inManagedObjectContext:context];
+    BOOL success = [self.cityDAO deleteCity:cityName inManagedObjectContext:context];
+    
+    if (!success) {
+        return NO;
+    }
+    
     NSLog(@"city %@ removed", cityName);
     
     [context processPendingChanges];    
@@ -146,6 +176,8 @@
         [self.countryDAO deleteCountry:countryName inManagedObjectContext:context];
         NSLog(@"country %@ removed", countryName);
     }
+    
+    return YES;
 }
 
 - (NSArray*) userCities
@@ -162,7 +194,7 @@
     return cityNames;
 }
 
-- (NSString*) fullUrlPath:(NSString*) partial
++ (NSString*) fullUrlPath:(NSString*) partial
 {
     NSMutableString *urlPath = [NSMutableString stringWithString:@"https://abo-"];
     [urlPath appendString:partial];
@@ -170,7 +202,7 @@
     return urlPath;
 }
 
-- (NSString*) fullRealtimeInfoUrlPath:(NSString*) partial ofStation:(int) stationID
++ (NSString*) fullRealtimeInfoUrlPath:(NSString*) partial ofStation:(int) stationID
 {
     NSMutableString *urlPath = [NSMutableString stringWithString:@"https://abo-"];
     [urlPath appendString:partial];
@@ -221,7 +253,7 @@
 - (NSString*) realtimeInfoPathOfStation:(int) stationID inCity:(NSString*) cityName
 {
     City *city = [self city:cityName];
-    NSString *realtimeInfoPath = [self fullRealtimeInfoUrlPath:city.url ofStation:stationID];
+    NSString *realtimeInfoPath = [WorldbikesCoreService fullRealtimeInfoUrlPath:city.url ofStation:stationID];
     return realtimeInfoPath;
 }
 
@@ -264,9 +296,44 @@
     Station *station = data;
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                           [NSString stringWithFormat:@"%@ (%d)", station.stationName, [station.stationID intValue]], @"title", 
-                          station.stationFullAddress, @"detail",
+                          station.stationFullAddress, @"detail",                          
+                          station.stationID, @"stationID",
+                          station.city.cityName, @"cityName",
                           nil];
     return dict;
+}
+
+-(Alert*) addAlertWithID:(NSString*) alertID andType:(NSString*) alertType toStation:(int) stationID inCity:(NSString*) cityName
+{
+    NSManagedObjectContext *context = [self managedObjectContext];
+    Station *station = [self.stationDAO station:stationID inCity:cityName inManagedObjectContext:context];
+    Alert *alert = [self.alertDAO addAlertWithID:alertID andType:alertType inManagedObjectContext:context];
+    assert(nil != station);
+    assert(nil != alert);
+    
+    [station addAlertsObject:alert];
+    [self.alertPool addAlert:alert];
+    return alert;
+}
+
+-(BOOL) deleteAlertWithID:(NSString*) alertID andType:(NSString*) alertType
+{
+    BOOL success = [self.alertDAO deleteAlertWithID:alertID andType:alertType inManagedObjectContext:[self managedObjectContext]];
+    if (success) {
+        [self.alertPool removeAlertWithID:alertID];
+        return success;
+    }
+    return NO;
+}
+
+-(BOOL) hasAlertSet:(NSString*) alertID;
+{
+    return [self.alertDAO hasAlertSet:alertID inManagedObjectContext:[self managedObjectContext]];
+}
+
+-(BOOL) stopAlertPool
+{
+    return self.stopAlertPool;
 }
 
 @end

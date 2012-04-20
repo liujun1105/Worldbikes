@@ -7,7 +7,8 @@
 //
 
 #import "Alert.h"
-
+#define FreeStandsAlert @"0"
+#define BikeAvailableAlert @"1"
 @interface Alert (EXT)
 
 @end

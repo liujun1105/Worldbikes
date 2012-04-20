@@ -120,8 +120,10 @@
 }
 
 - (void) removeCity:(NSString*) cityName
+- (BOOL) removeCity:(NSString*) cityName
 {
     [self.coreService removeCity:cityName];
+    return [self.coreService removeCity:cityName];
 }
 
 - (void) downloadStationDataOfCity:(NSString *) cityName
@@ -132,6 +134,7 @@
     assert(nil != city);
     
     NSArray *stationData = [self stationDataForMapAnnotation:[self.coreService fullUrlPath:city.url]];
+    NSArray *stationData = [self stationDataForMapAnnotation:[WorldbikesCoreService fullUrlPath:city.url]];
     
     if (nil == stationData) {
         @throw [NSException exceptionWithName:@"DownloadStationDataFailedException" 

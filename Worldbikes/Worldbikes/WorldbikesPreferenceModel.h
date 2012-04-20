@@ -23,7 +23,7 @@
 - (NSString*) nameOfCityAtIndex:(int) cityIndex OfCountryAtIndex:(int) countryIndex;
 - (NSString*) urlOfCityAtIndex:(int) cityIndex ofcountryAtIndex:(int) countryIndex;
 - (City *) addCity:(NSString*) cityName withURLPath:(NSString*) url toCountry:(NSString*) countryName;
-- (void) removeCity:(NSString*) cityName;
+- (BOOL) removeCity:(NSString*) cityName;
 - (void) downloadStationDataOfCity:(NSString *) cityName;
 - (void) removeStationDataOfCity:(NSString *) cityName;
 

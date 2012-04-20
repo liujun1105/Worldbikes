@@ -11,8 +11,8 @@
 @class XObjRealtimeInfo;
 
 @interface WorldbikesCoreServiceModel : NSObject
+@property (nonatomic) BOOL isPersistentStoreOpened;
 
-@property (nonatomic) BOOL isPersistStoreOpened;
 - (void) setup;
 
 - (NSArray*) bicycleSchemes:(NSURL *) url;
@@ -23,4 +23,7 @@
 
 - (NSArray*) allStationsInCity:(NSString*) cityName;
 - (NSDictionary*) realtimeInfoOfStation:(int) stationID inCity:(NSString*) cityName;
+
+- (void) initAlertPoolWithDelegate;
+- (void) stopAlertPoolService;
 @end

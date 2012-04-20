@@ -7,18 +7,27 @@
 //
 
 #import "AlertViewController.h"
-
+#import "WorldbikesFavoriteModel.h"
+#import "WorldbikesAlertPool.h"
+#import "Alert+EXT.h"
+#import "Worldbikes.h"
 @interface AlertViewController ()
 
 @end
 
 @implementation AlertViewController
+@synthesize freeStandsSwitch = _freeStandsSwitch;
+@synthesize availableBikesSwitch = _availableBikesSwitch;
+@synthesize alertTableView = _alertTableView;
+@synthesize favoriteModel = _favoriteModel;
+@synthesize stationID = _stationID;
+@synthesize cityName = _cityName;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+        // Custom initialization        
     }
     return self;
 }
@@ -26,19 +35,47 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    NSString *alertID = [NSString stringWithFormat:@"%@_%d_%@",self.cityName,self.stationID,BikeAvailableAlert];
+    if ([self.favoriteModel hasAlertSet:alertID]) {
+        [self.availableBikesSwitch setOn:YES];
+    }
+    alertID = [NSString stringWithFormat:@"%@_%d_%@",self.cityName,self.stationID,FreeStandsAlert];
+    if ([self.favoriteModel hasAlertSet:alertID]) {
+        [self.freeStandsSwitch setOn:YES];
+    }
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(updateSwitches:) 
+                                                 name:@"UpdateAlertSwitch" 
+                                               object:nil];
 }
 
 - (void)viewDidUnload
 {
+    [self setFreeStandsSwitch:nil];
+    [self setAvailableBikesSwitch:nil];
+    [self setAlertTableView:nil];
+    [self setFavoriteModel:nil];
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self 
+                                                    name:@"UpdateAlertSwitch" 
+                                                  object:nil];
+}
+
+- (void)updateSwitches:(NSNotification *) notification
+{
+    NSDictionary *dict = notification.userInfo;
+    if ([[dict valueForKey:@"alertType"] isEqualToString:BikeAvailableAlert]) {
+        [self.availableBikesSwitch setOn:NO];
+    }
+    else if ([[dict valueForKey:@"alertType"] isEqualToString:FreeStandsAlert]) {
+        [self.freeStandsSwitch setOn:NO];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -46,82 +83,28 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (IBAction)availableBikeAlertStatusChanged:(UISwitch *)sender 
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    NSString *alertID = [NSString stringWithFormat:@"%@_%d_%@",self.cityName,self.stationID,BikeAvailableAlert];
+    Log(@"%@",alertID);    
+    if (sender.on) {
+        [self.favoriteModel addAlertWithID:alertID andType:BikeAvailableAlert toStation:self.stationID inCity:self.cityName];    
+    }
+    else {
+        [self.favoriteModel deleteAlertWithID:alertID andType:BikeAvailableAlert];
+    }
     
-    // Configure the cell...
-    
-    return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (IBAction)freeStandsAlertStatusChanged:(UISwitch *)sender 
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    NSString *alertID = [NSString stringWithFormat:@"%@_%d_%@",self.cityName,self.stationID,FreeStandsAlert];
+    Log(@"%@",alertID);
+    if (sender.on) {
+        [self.favoriteModel addAlertWithID:alertID andType:FreeStandsAlert toStation:self.stationID inCity:self.cityName];
+    }
+    else {
+        [self.favoriteModel deleteAlertWithID:alertID andType:FreeStandsAlert];
+    }
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
-}
-
 @end

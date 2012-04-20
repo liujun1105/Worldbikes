@@ -7,7 +7,7 @@
 //
 
 #import "FavoriteStationViewController.h"
-
+#import "AlertViewController.h"
 
 @interface FavoriteStationViewController ()
 
@@ -54,11 +54,22 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     NSDictionary *dict = [self.favoriteModel grabCellRelatedInfomationFrom:[self.fetchedResultsController objectAtIndexPath:indexPath]];
-    NSLog(@"%d", [dict count]);
+
     cell.textLabel.text = [dict objectForKey:@"title"];
     cell.detailTextLabel.text = [dict objectForKey:@"detail"];
-    
+
     return cell;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSIndexPath *path = [self.tableView indexPathForSelectedRow];
+    NSDictionary *dict = [self.favoriteModel grabCellRelatedInfomationFrom:[self.fetchedResultsController objectAtIndexPath:path]];
+
+    AlertViewController *alertViewController = [segue destinationViewController];
+    alertViewController.favoriteModel = self.favoriteModel;
+    alertViewController.cityName = [dict objectForKey:@"cityName"];
+    alertViewController.stationID = [[dict objectForKey:@"stationID"] intValue];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

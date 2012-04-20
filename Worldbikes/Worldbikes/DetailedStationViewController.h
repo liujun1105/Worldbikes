@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "WorldbikesStationAnnotation.h"
-#import "DetailedStationTableView.h"
+
 @class WorldbikesFavoriteModel;
 
 @interface DetailedStationViewController : UITableViewController

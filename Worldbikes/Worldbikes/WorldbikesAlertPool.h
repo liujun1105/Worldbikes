@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "WorldbikesAlertPoolDelegate.h"
+@class Alert;
 @interface WorldbikesAlertPool : NSThread
+@property id <WorldbikesAlertPoolDelegate> delegate;
 
+-(void) removeAlertWithID:(NSString*) key;
+-(void) addAlert:(Alert*) alert;
 @end

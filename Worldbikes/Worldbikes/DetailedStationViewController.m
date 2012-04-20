@@ -53,6 +53,7 @@
                                              selector:@selector(stopAnimating:) 
                                                  name:@"FavoriteListUpdated" 
                                                object:nil];
+    [self.savingProgress setHidden:NO];
     [self.savingProgress startAnimating];
     [self.navigationItem setHidesBackButton:YES];
     [self.navigationItem.rightBarButtonItem setEnabled:NO];
@@ -66,7 +67,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(stopAnimating:) 
                                                  name:@"FavoriteListUpdated" 
-                                               object:nil];    
+                                               object:nil]; 
+    [self.savingProgress setHidden:NO];    
     [self.savingProgress startAnimating];
     [self.navigationItem setHidesBackButton:YES];
     [self.navigationItem.rightBarButtonItem setEnabled:NO];    
@@ -87,6 +89,9 @@
 
     self.savingProgress = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.savingProgress.center = self.view.center;
+    [self.view addSubview:self.savingProgress];
+    [self.savingProgress setColor:[UIColor blackColor]];
+    [self.savingProgress setHidden:YES];
     
     // Do any additional setup after loading the view from its nib.
     [self.city setText:self.annotation.cityName];
