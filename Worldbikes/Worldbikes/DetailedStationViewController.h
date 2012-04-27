@@ -23,7 +23,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *total;
 @property (strong, nonatomic) IBOutlet UILabel *city;
 
-@property (strong, nonatomic) UIActivityIndicatorView *savingProgress;
 @property (strong, nonatomic) WorldbikesFavoriteModel *favoriteModel;
 @property (strong, nonatomic) WorldbikesStationAnnotation *annotation;
 @property (strong, nonatomic) NSDictionary *realtimeInfoDict;

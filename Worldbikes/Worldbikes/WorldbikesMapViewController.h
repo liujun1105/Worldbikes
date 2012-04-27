@@ -13,10 +13,11 @@
 @class WorldbikesFavoriteModel;
 @class WorldbikesCoreServiceModel;
 
-@interface WorldbikesMapViewController : UIViewController<MKMapViewDelegate,CLLocationManagerDelegate>
+@interface WorldbikesMapViewController : UIViewController <MKMapViewDelegate,CLLocationManagerDelegate>
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *locationButton;
 @property (strong, nonatomic) IBOutlet WorldbikesCoreServiceModel *coreServiceModel;
 @property (strong, nonatomic) IBOutlet WorldbikesFavoriteModel *favoriteModel;
-
+- (IBAction)locateNearestStationPressed:(UIBarButtonItem *)sender;
 
 @end

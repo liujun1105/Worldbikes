@@ -17,6 +17,7 @@
 #import "Worldbikes.h"
 #import "WorldbikesServiceProvider.h"
 #import "WorldbikesAlertPool.h"
+#import "XObjRegion.h"
 
 @interface WorldbikesCoreServiceModel ()
 @property (nonatomic,readonly) WorldbikesCoreService *coreService;
@@ -101,16 +102,24 @@
     }
 
     NSMutableArray *stations = [NSMutableArray array];
-    for (XObjStation *station in array) {        
-        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                             station.stationName, @"stationName",
-                                             [NSNumber numberWithInt:station.stationID], @"stationID",
-                                             station.stationAddress, @"stationAddress", 
-                                             station.stationFullAddress, @"stationFullAddress", 
-                                             [NSNumber numberWithDouble:station.stationLatitude], @"stationLatitude",
-                                             [NSNumber numberWithDouble:station.stationLongitude], @"stationLongitude",
-                                             nil];
-        [stations addObject:dict];
+    for (NSObject *obj in array) {        
+        
+        if ([obj isKindOfClass:[XObjStation class]]) {
+            XObjStation *station = (XObjStation*)obj;
+            NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                         station.stationName, @"stationName",
+                                         [NSNumber numberWithInt:station.stationID], @"stationID",
+                                         station.stationAddress, @"stationAddress", 
+                                         station.stationFullAddress, @"stationFullAddress", 
+                                         [NSNumber numberWithDouble:station.stationLatitude], @"stationLatitude",
+                                         [NSNumber numberWithDouble:station.stationLongitude], @"stationLongitude",
+                                         nil];
+            [stations addObject:dict];            
+        }
+        else {
+            XObjRegion *region = (XObjRegion *)obj;
+            [stations addObject:region];
+        }
     }
     return stations;
 }
@@ -151,6 +160,11 @@
 - (void) stopAlertPoolService
 {
     self.coreService.stopAlertPool = YES;
+}
+
+- (NSDictionary*) regionBoundary:(NSString*) cityName
+{
+    return [self.coreService regionBoundary:cityName];
 }
 
 @end

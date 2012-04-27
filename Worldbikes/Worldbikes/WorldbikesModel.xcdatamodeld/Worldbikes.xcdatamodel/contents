@@ -7,6 +7,10 @@
     </entity>
     <entity name="City" representedClassName="City" syncable="YES">
         <attribute name="cityName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="maxLat" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="maxLng" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="minLat" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="minLng" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="country" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Country" inverseName="cities" inverseEntity="Country" syncable="YES"/>
         <relationship name="stations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Station" inverseName="city" inverseEntity="Station" syncable="YES"/>
@@ -28,7 +32,7 @@
     </entity>
     <elements>
         <element name="Alert" positionX="-272" positionY="-54" width="128" height="90"/>
-        <element name="City" positionX="-747" positionY="-114" width="128" height="105"/>
+        <element name="City" positionX="-747" positionY="-114" width="128" height="165"/>
         <element name="Country" positionX="-461" positionY="-171" width="128" height="75"/>
         <element name="Station" positionX="-461" positionY="-51" width="128" height="165"/>
     </elements>

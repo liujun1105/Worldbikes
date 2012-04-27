@@ -7,11 +7,11 @@
 //
 
 #import "CityPreferenceTableViewController.h"
-
+#import "WorldbikesAppDelegate.h"
 
 @interface CityPreferenceTableViewController ()
 @property (nonatomic,strong) NSArray *cities;
-@property (nonatomic,strong) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic,strong) NSString *cityName;
 @end
 
 @implementation CityPreferenceTableViewController
@@ -19,7 +19,7 @@
 @synthesize countryName = _countryName;
 @synthesize countryIndex = _countryIndex;
 @synthesize cities = _cities;
-@synthesize activityIndicator = _activityIndicator;
+@synthesize cityName = _cityName;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -30,10 +30,10 @@
     return self;
 }
 
+
 - (void) loadCities
 {
     self.cities = [self.preference cityPreferences];
-    Log(@"%d", [self.cities count]);
 }
 
 - (void) setCities:(NSArray *)cities
@@ -52,15 +52,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [self.view addSubview:self.activityIndicator];
-    self.activityIndicator.center = self.view.center;
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
 
 - (void)viewDidUnload
 {
-    [self setActivityIndicator:nil];
     [self setPreference:nil];
     [super viewDidUnload];
 }
@@ -106,9 +103,7 @@
     NSString *cityName = [self.preference nameOfCityAtIndex:indexPath.row OfCountryAtIndex:self.countryIndex];    
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
-
-    [self.activityIndicator setHidesWhenStopped:YES];
-    [self.activityIndicator startAnimating];
+    [[WorldbikesAppDelegate sharedAppDelegate] showActivityView];
     [self.navigationItem setHidesBackButton:YES];
     
     if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {        
@@ -124,13 +119,8 @@
                 BOOL success = [self.preference removeCity:cityName];
                 if (success) {
                     cell.accessoryType = UITableViewCellAccessoryNone;
-                    /* this updates the MKAnnotationViews */
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"isPersistentStoreContentChanged" 
-                                                                        object:nil 
-                                                                      userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                                cityName, @"cityName", 
-                                                                                [NSNumber numberWithBool:YES], @"isForDeletion",
-                                                                                nil]];
+                    self.cityName = cityName;
+                    alertView.tag = 1;
                 }
                 else {
                     alertView = [[UIAlertView alloc] 
@@ -139,11 +129,11 @@
                                  delegate:self
                                  cancelButtonTitle:@"OK"
                                  otherButtonTitles: nil];
+                    alertView.tag = 11;
                 }
-                [alertView setTag:-1];
-                [alertView show];
-                [self.activityIndicator stopAnimating];
-                [self.navigationItem setHidesBackButton:NO];
+                [[WorldbikesAppDelegate sharedAppDelegate] hideActivityView];
+                [self.navigationItem setHidesBackButton:NO];         
+                [alertView show];                
             });
         });
         dispatch_release(removeQ);
@@ -151,7 +141,7 @@
     else {
         
         /* 
-         * when new city is added, downloading station metadata for that city, e.g., geolocation data 
+         * when a new city is added, downloading station metadata for that city, e.g., geolocation data 
          */
         
         NSString *url = [self.preference urlOfCityAtIndex:indexPath.row ofcountryAtIndex:self.countryIndex];
@@ -183,13 +173,8 @@
 
                         // if success, update the cell
                         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-                        /* this updates the MKAnnotationViews */
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"isPersistentStoreContentChanged" 
-                                                                            object:nil 
-                                                                          userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                                    cityName, @"cityName", 
-                                                                                    [NSNumber numberWithBool:NO], @"isForDeletion",
-                                                                                    nil]];
+                        self.cityName = cityName;
+                        alertView.tag = 2;                        
                     }
                     else {
                         alertView = [[UIAlertView alloc] 
@@ -197,12 +182,12 @@
                                                   message:@"Download Failed"
                                                   delegate:self
                                                   cancelButtonTitle:@"OK"
-                                                  otherButtonTitles: nil];
+                                                  otherButtonTitles: nil];    
+                        alertView.tag = 21;
                     }
-                    [alertView setTag:-2];
                     [alertView show];
                 }
-                [self.activityIndicator stopAnimating];
+                [[WorldbikesAppDelegate sharedAppDelegate] hideActivityView];
                 [self.navigationItem setHidesBackButton:NO];
                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:FALSE];
             });
@@ -213,8 +198,30 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    
+    if ([alertView tag] == 1) {
+        Log(@"remove stations");
+        if (buttonIndex == 0) {
+            /* this updates the MKAnnotationViews */
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"isPersistentStoreContentChanged" 
+                                                                object:nil 
+                                                              userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                        self.cityName, @"cityName", 
+                                                                        [NSNumber numberWithBool:YES], @"isForDeletion",
+                                                                        nil]];
+        }
+    }
+    else if ([alertView tag] == 2) {
+        Log(@"add stations");        
+        if (buttonIndex == 0) {
+            /* this updates the MKAnnotationViews */
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"isPersistentStoreContentChanged" 
+                                                                object:nil 
+                                                              userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                        self.cityName, @"cityName", 
+                                                                        [NSNumber numberWithBool:NO], @"isForDeletion",
+                                                                        nil]];
+        }
+    }    
 }
-
 
 @end

@@ -9,20 +9,14 @@
 #import "CountryPreferenceTableViewController.h"
 
 @interface CountryPreferenceTableViewController ()
-
+@property (nonatomic,strong) NSMutableArray *displayItems;
 @end
 
 @implementation CountryPreferenceTableViewController
+@synthesize displayItems = _displayItems;
 @synthesize preference = _preference;
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@synthesize countrySearchBar = _countrySearchBar;
+@synthesize countryTableView = _countryTableView;
 
 - (void)loadSupportedCountries
 {
@@ -31,6 +25,12 @@
     dispatch_async(downloadQ, ^{
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.preference setup];
+            self.displayItems = [NSMutableArray array];
+            int numberOfCountry = [self.preference countrySize];
+            for (int i=0; i<numberOfCountry; i++) {
+                [self.displayItems addObject:[self.preference nameOfCountryAtIndex:i]];
+            }
+            [self.countryTableView reloadData];
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:FALSE];
         });
     });
@@ -38,15 +38,53 @@
     
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    // not need for it, hide it
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.countrySearchBar.delegate = self;
+    self.countryTableView.delegate = self;
+    self.countryTableView.dataSource = self;
+    
     [self loadSupportedCountries];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShown:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHidden:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void) keyboardShown:(NSNotification *) notification
+{
+    CGRect keyboardFrame;
+    [[[notification userInfo] objectForKey:UIKeyboardDidShowNotification] getValue:&keyboardFrame];
+    CGRect tableViewFrame = self.countryTableView.frame;
+    tableViewFrame.size.height -= keyboardFrame.size.height;
+    [self.countryTableView setFrame:tableViewFrame];
+}
+
+- (void) keyboardHidden:(NSNotification *) notification
+{
+    CGRect keyboardFrame;
+    [[[notification userInfo] objectForKey:UIKeyboardDidHideNotification] getValue:&keyboardFrame];
+    CGRect tableViewFrame = self.countryTableView.frame;
+    tableViewFrame.size.height += keyboardFrame.size.height;    
+    [self.countryTableView setFrame:tableViewFrame];
 }
 
 - (void)viewDidUnload
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    
     [self setPreference:nil];
+    [self setCountrySearchBar:nil];
+    [self setCountryTableView:nil];
     [super viewDidUnload];
 }
 
@@ -64,8 +102,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
-    return [self.preference countrySize];
+    return [self.displayItems count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -73,72 +110,71 @@
     static NSString *CellIdentifier = @"SupportedCountryCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    
-    cell.textLabel.text = [self.preference nameOfCountryAtIndex:indexPath.row];
+    cell.textLabel.text = [self.displayItems objectAtIndex:indexPath.row];
     
     return cell;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+    NSIndexPath *indexPath = [self.countryTableView indexPathForCell:sender];
+ 
+    if ([segue.identifier isEqualToString:@"CountryPreferenceToCityPreferenceSegue"]) {
+        CityPreferenceTableViewController *citySettingViewController = [segue destinationViewController];
+
         
-    CityPreferenceTableViewController *citySettingViewController = [segue destinationViewController];
-    [citySettingViewController setCountryName:[self.preference nameOfCountryAtIndex:indexPath.row]];
-    [citySettingViewController setCountryIndex:indexPath.row];
-    [citySettingViewController setPreference:self.preference];
+        int numberOfCountry = [self.preference countrySize];
+        NSLog(@"%d",indexPath.row);
+        for (int i=0; i<numberOfCountry; i++) {
+            if ([[self.displayItems objectAtIndex:indexPath.row] isEqualToString:[self.preference nameOfCountryAtIndex:i]]) {
+                [citySettingViewController setCountryName:[self.preference nameOfCountryAtIndex:i]];
+                [citySettingViewController setCountryIndex:i];
+                break;
+            }
+        }
+        [citySettingViewController setPreference:self.preference];
+    }
+    
+    
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - Search bar delegate methods
+- (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+    Log(@"search for %@", searchText);
+    if (searchText.length == 0) {
+        assert(nil != self.displayItems);
+        [self.displayItems removeAllObjects];
+        int numberOfCountry = [self.preference countrySize];
+        for (int i=0; i<numberOfCountry; i++) {
+            [self.displayItems addObject:[self.preference nameOfCountryAtIndex:i]];
+        }
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+    }
+    else {
+        [self.displayItems removeAllObjects];
+        int numberOfCountry = [self.preference countrySize];
+        for (int i=0; i<numberOfCountry; i++) {
+            NSString* countryName = [self.preference nameOfCountryAtIndex:i];
+            NSRange range = [countryName rangeOfString:searchText options:NSCaseInsensitiveSearch];
+            if (range.location != NSNotFound) {
+                [self.displayItems addObject:countryName];
+            }
+        }
+    }
+    [self.countryTableView reloadData];
+}
+
+- (void) searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    [searchBar resignFirstResponder];
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+- (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
+    [self.countrySearchBar setText:@""];
+    [searchBar resignFirstResponder];
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
-}
 
 @end

@@ -13,6 +13,7 @@
 #import "XMLCrawler.h"
 #import "City.h"
 #import "Station.h"
+#import "XObjRegion.h"
 #import "WorldbikesCoreService.h"
 #import "WorldbikesServiceProvider.h"
 
@@ -139,12 +140,23 @@
                                      userInfo:nil];
     }
     
-    for (NSDictionary *stationDict in stationData) {            
-        assert(nil != stationDict);
-        Station *station = [self.coreService addStation:stationDict];
-        assert(nil != station);
-        [city addStationsObject:station];
-        assert(nil != station.city);
+    for (NSObject *obj in stationData) {            
+        
+        if ([obj isKindOfClass:[XObjRegion class]]) {
+            XObjRegion *region = (XObjRegion *)obj;
+            city.minLat = [NSNumber numberWithDouble:region.minLat];
+            city.minLng = [NSNumber numberWithDouble:region.minLng];
+            city.maxLat = [NSNumber numberWithDouble:region.maxLat];
+            city.maxLng = [NSNumber numberWithDouble:region.maxLng];
+        }
+        else {
+            NSDictionary *stationDict = (NSDictionary *)obj;
+            assert(nil != stationDict);
+            Station *station = [self.coreService addStation:stationDict];
+            assert(nil != station);
+            [city addStationsObject:station];
+            assert(nil != station.city);
+        }
     }
 }    
 

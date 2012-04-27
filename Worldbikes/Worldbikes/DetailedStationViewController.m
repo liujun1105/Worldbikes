@@ -8,13 +8,12 @@
 
 #import "DetailedStationViewController.h"
 #import "WorldbikesFavoriteModel.h"
-
+#import "WorldbikesAppDelegate.h"
 @interface DetailedStationViewController ()
 
 @end
 
 @implementation DetailedStationViewController
-@synthesize savingProgress = _savingProgress;
 @synthesize stationID = _stationID;
 @synthesize stationName = _stationName;
 @synthesize stationLatitude = _stationLatitude;
@@ -42,7 +41,7 @@
 {
     NSLog(@"stop animating");
     [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
-    [self.savingProgress stopAnimating];
+    [[WorldbikesAppDelegate sharedAppDelegate] hideActivityView];
     [self.navigationItem setHidesBackButton:NO];
     [self.navigationItem.rightBarButtonItem setEnabled:YES];
 }
@@ -53,8 +52,7 @@
                                              selector:@selector(stopAnimating:) 
                                                  name:@"FavoriteListUpdated" 
                                                object:nil];
-    [self.savingProgress setHidden:NO];
-    [self.savingProgress startAnimating];
+    [[WorldbikesAppDelegate sharedAppDelegate] showActivityView];
     [self.navigationItem setHidesBackButton:YES];
     [self.navigationItem.rightBarButtonItem setEnabled:NO];
     [self.favoriteModel addToFavoriteListOfStation:[self.stationID.text intValue] inCity:self.city.text];
@@ -68,8 +66,7 @@
                                              selector:@selector(stopAnimating:) 
                                                  name:@"FavoriteListUpdated" 
                                                object:nil]; 
-    [self.savingProgress setHidden:NO];    
-    [self.savingProgress startAnimating];
+    [[WorldbikesAppDelegate sharedAppDelegate] showActivityView];
     [self.navigationItem setHidesBackButton:YES];
     [self.navigationItem.rightBarButtonItem setEnabled:NO];    
 
@@ -86,12 +83,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    self.savingProgress = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    self.savingProgress.center = self.view.center;
-    [self.view addSubview:self.savingProgress];
-    [self.savingProgress setColor:[UIColor blackColor]];
-    [self.savingProgress setHidden:YES];
+    
+    [self.navigationController setNavigationBarHidden:NO];
     
     // Do any additional setup after loading the view from its nib.
     [self.city setText:self.annotation.cityName];
@@ -132,7 +125,6 @@
     [self setTotal:nil];
     [self setCity:nil];
     [self setFavoriteModel:nil];
-    [self setSavingProgress:nil];
     [super viewDidUnload];
 }
 

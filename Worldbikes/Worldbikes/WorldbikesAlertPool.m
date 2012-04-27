@@ -23,6 +23,8 @@
 @end
 
 @implementation WorldbikesAlertPool
+// WorldbikesAlertPoolDelegate, responsible for stopping alerts 
+// or deleting alerts from the alert pool
 @synthesize alertPool = _alertPool;
 @synthesize delegate = _delegate;
 - (id) init 
@@ -34,6 +36,9 @@
     return self;
 }
 
+/*
+ * This function retrieves the realtime information of a given station
+ */
 - (NSArray*) realtimeInfo:(NSURL *) url
 {
     XMLCrawler *xmlCrawler = [[XMLCrawler alloc] init];
@@ -51,9 +56,13 @@
 {
     NSURL *url = [NSURL URLWithString:[WorldbikesCoreService fullRealtimeInfoUrlPath:alert.station.city.url
                                                                            ofStation:[alert.station.stationID intValue]]];
+    
+    // get the realtime information of the station 
     NSArray *realtimeInfos = [self realtimeInfo:url];    
     XObjRealtimeInfo *realtimeInfo = [realtimeInfos lastObject];
     
+    // if there are free stands or bikes available, then return YES
+    // to trigger the alert    
     if ([alert.alertType intValue] == [FreeStandsAlert intValue]) {
         return realtimeInfo.free > 0;
     }
@@ -61,12 +70,14 @@
         return realtimeInfo.available > 0;
     }
     
-    return -1;
+    // no need to trigger the alert
+    return NO;
 }
 
 - (void) main
 {
-    [NSTimer scheduledTimerWithTimeInterval:15
+    // the timer is scheduled with the timer interval of 30 seconds
+    [NSTimer scheduledTimerWithTimeInterval:30
                                      target:self 
                                    selector:@selector(onTimer:) 
                                    userInfo:nil 
@@ -77,7 +88,7 @@
 
 -(void) onTimer:(NSTimer *)theTimer 
 {
-    Log(@"onTimer");
+    Log(@"Scheduled alerts checking");
     @synchronized(self.alertPool){
         if ([self.alertPool count]>0) {
             [self checkRealtimeInfo];
@@ -87,7 +98,6 @@
 
 -(void)  checkRealtimeInfo
 {
-    Log(@"-->> AlertPool checkRealtimeInfo()");
     NSArray *keys = [NSArray arrayWithArray:self.alertPool.allKeys];
     for (NSString *key in keys) {
         Alert *alert = [self.alertPool valueForKey:key];
@@ -96,17 +106,18 @@
             Log(@"Alert triggered");
             
             UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-            if (nil == localNotification) {
-                return;
-            }
+            if (nil == localNotification) { return; }
+            
+            // the time when the local notification should be displayed
+            NSDate *notificationDate = [NSDate dateWithTimeIntervalSinceNow:30];
+            
             [localNotification setAlertBody:[NSString stringWithFormat:@"%@", alert.description]];
             [localNotification setAlertAction:@"Open App"];
             [localNotification setHasAction:YES];   
             [localNotification setSoundName:UILocalNotificationDefaultSoundName];
-            NSDate *notificationDate = [NSDate dateWithTimeIntervalSinceNow:10];
             localNotification.fireDate  = notificationDate;
             localNotification.timeZone  = [NSTimeZone systemTimeZone];
-            localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber]+1;
+            localNotification.applicationIconBadgeNumber = ++[UIApplication sharedApplication].applicationIconBadgeNumber;
             [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 
             NSString *type = alert.alertType;

@@ -101,8 +101,8 @@
       <AdditionalOptions>
       </AdditionalOptions>
       <LocationScenarioReference
-         identifier = "London, England"
-         referenceType = "1">
+         identifier = "../../gpx/St Stephen&apos;s Green.gpx"
+         referenceType = "0">
       </LocationScenarioReference>
    </LaunchAction>
    <ProfileAction

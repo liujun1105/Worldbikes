@@ -23,6 +23,7 @@
 
 - (NSArray*) allStationsInCity:(NSString*) cityName;
 - (NSDictionary*) realtimeInfoOfStation:(int) stationID inCity:(NSString*) cityName;
+- (NSDictionary*) regionBoundary:(NSString*) cityName;
 
 - (void) initAlertPoolWithDelegate;
 - (void) stopAlertPoolService;

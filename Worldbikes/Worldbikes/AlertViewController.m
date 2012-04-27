@@ -35,6 +35,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(updateSwitches:) 
+                                                 name:@"UpdateAlertSwitch" 
+                                               object:nil];    
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -48,10 +52,6 @@
     if ([self.favoriteModel hasAlertSet:alertID]) {
         [self.freeStandsSwitch setOn:YES];
     }
-    [[NSNotificationCenter defaultCenter] addObserver:self 
-                                             selector:@selector(updateSwitches:) 
-                                                 name:@"UpdateAlertSwitch" 
-                                               object:nil];
 }
 
 - (void)viewDidUnload
@@ -86,7 +86,7 @@
 - (IBAction)availableBikeAlertStatusChanged:(UISwitch *)sender 
 {
     NSString *alertID = [NSString stringWithFormat:@"%@_%d_%@",self.cityName,self.stationID,BikeAvailableAlert];
-    Log(@"%@",alertID);    
+    Log(@"%@",alertID);
     if (sender.on) {
         [self.favoriteModel addAlertWithID:alertID andType:BikeAvailableAlert toStation:self.stationID inCity:self.cityName];    
     }

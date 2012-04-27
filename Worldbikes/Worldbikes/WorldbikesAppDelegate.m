@@ -7,21 +7,65 @@
 //
 
 #import "WorldbikesAppDelegate.h"
-#import "WorldbikesCoreService.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface WorldbikesAppDelegate ()
+
+/* a shared view that can be used by all view controller to display activity status*/
+@property (nonatomic,strong) UIView *activityView;
 
 @end
 
 @implementation WorldbikesAppDelegate
 
 @synthesize window = _window;
+@synthesize activityView = _activityView;
+
++ (WorldbikesAppDelegate *)sharedAppDelegate  
+{  
+    return (WorldbikesAppDelegate*)[UIApplication sharedApplication].delegate;  
+} 
+
+- (void)hideActivityView  
+{  
+    [self.activityView removeFromSuperview];  
+}  
+
+- (void) showActivityView
+{
+    if (nil == self.activityView) {
+        self.activityView = [[UIView alloc] initWithFrame:CGRectMake(self.window.center.x-50, 
+                                                                self.window.center.y-50, 
+                                                                100, 100)];    
+        self.activityView.opaque = NO;  
+        self.activityView.backgroundColor = [UIColor blackColor];  
+        self.activityView.alpha = 0.7;  
+        self.activityView.layer.cornerRadius = 10.0f;
+        self.activityView.layer.shadowOffset = CGSizeZero;
+        self.activityView.layer.shadowColor = [UIColor blackColor].CGColor;
+        self.activityView.layer.shadowOpacity = 1;
+        self.activityView.layer.shadowRadius = 130;
+        
+        UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        self.activityView.layer.shadowPath = [UIBezierPath bezierPathWithRect:
+                                 CGRectInset(activityIndicator.bounds, -40, -40)].CGPath;     
+
+        activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];    
+        
+        [self.activityView addSubview:activityIndicator];
+        [activityIndicator setHidden:NO];
+        [activityIndicator startAnimating];        
+        [activityIndicator setFrame:self.activityView.bounds];
+    }
+    [self.window addSubview:self.activityView];
+}
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {   
     // Override point for customization after application launch.
     
-    
+    application.applicationIconBadgeNumber = 0;
     return YES;
 }
 							
@@ -35,6 +79,7 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+ 
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -45,6 +90,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    application.applicationIconBadgeNumber = 0;    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -54,14 +100,19 @@
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification 
 {
-
-    UIAlertView *alertView = [[UIAlertView alloc] 
-                              initWithTitle:@"Alert Info:"
-                              message:notification.alertBody 
-                              delegate:self
-                              cancelButtonTitle:@"OK" 
-                              otherButtonTitles: nil];
-    [alertView show];
+    
+    if (application.applicationState == UIApplicationStateActive) {
+        UIAlertView *alertView = [[UIAlertView alloc] 
+                                  initWithTitle:@"Alert Info:"
+                                  message:notification.alertBody 
+                                  delegate:self
+                                  cancelButtonTitle:@"OK" 
+                                  otherButtonTitles: nil];
+        [alertView show];
+    }
+    else if (application.applicationState == UIApplicationStateBackground) {
+        NSLog(@"running at background...");
+    }
 }
 
 @end

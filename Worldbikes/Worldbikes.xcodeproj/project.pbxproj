@@ -24,6 +24,15 @@
 		43199E44153A0A8700B2B504 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4398833B15377F5F0026B950 /* CoreLocation.framework */; };
 		43199E47153A169C00B2B504 /* TestXMLCrawler.m in Sources */ = {isa = PBXBuildFile; fileRef = 43199E46153A169C00B2B504 /* TestXMLCrawler.m */; };
 		43199E4A153A270A00B2B504 /* WorldbikesStationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 43199E49153A270900B2B504 /* WorldbikesStationAnnotation.m */; };
+		4320B97515476A38007BD4B8 /* 193-location-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 4320B97415476A38007BD4B8 /* 193-location-arrow.png */; };
+		432CF98B1549E37400E6D1C1 /* ChildrensUnversityHopital-StStephensGreen.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 432CF98A1549E37400E6D1C1 /* ChildrensUnversityHopital-StStephensGreen.gpx */; };
+		432CF98E1549F27100E6D1C1 /* MKMapView+ZoomLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 432CF98D1549F27100E6D1C1 /* MKMapView+ZoomLevel.m */; };
+		433B6A7115489B21001EB2CF /* XObjRegion.m in Sources */ = {isa = PBXBuildFile; fileRef = 433B6A7015489B20001EB2CF /* XObjRegion.m */; };
+		433B6A7215489B21001EB2CF /* XObjRegion.m in Sources */ = {isa = PBXBuildFile; fileRef = 433B6A7015489B20001EB2CF /* XObjRegion.m */; };
+		433B6A7615489CBE001EB2CF /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 433B6A7515489CBE001EB2CF /* City.m */; };
+		433B6A7715489CBE001EB2CF /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 433B6A7515489CBE001EB2CF /* City.m */; };
+		434BACDB1544D53B00BDF423 /* 74-location.png in Resources */ = {isa = PBXBuildFile; fileRef = 434BACDA1544D53B00BDF423 /* 74-location.png */; };
+		436766981543183A00F82D64 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436766971543183A00F82D64 /* QuartzCore.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		43694088152F9977004562DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439F1AA6152BB602008845BE /* UIKit.framework */; };
 		43694089152F9977004562DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 439F1AA8152BB602008845BE /* Foundation.framework */; };
 		4369408F152F9977004562DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4369408D152F9977004562DA /* InfoPlist.strings */; };
@@ -62,8 +71,6 @@
 		43967092153CBC50002492D4 /* FavoriteStationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43967091153CBC50002492D4 /* FavoriteStationViewController.m */; };
 		43967095153CC423002492D4 /* WorldbikesFavoriteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 43967094153CC423002492D4 /* WorldbikesFavoriteModel.m */; };
 		43967096153CC423002492D4 /* WorldbikesFavoriteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 43967094153CC423002492D4 /* WorldbikesFavoriteModel.m */; };
-		4396709D153CC588002492D4 /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 4396709C153CC588002492D4 /* City.m */; };
-		4396709E153CC588002492D4 /* City.m in Sources */ = {isa = PBXBuildFile; fileRef = 4396709C153CC588002492D4 /* City.m */; };
 		43967DA215397BAE0089EBCE /* StationParserHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 43967DA115397BAE0089EBCE /* StationParserHandler.m */; };
 		43967DA315397BAE0089EBCE /* StationParserHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 43967DA115397BAE0089EBCE /* StationParserHandler.m */; };
 		43967DA615397BCC0089EBCE /* RealtimeInfoParserHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 43967DA515397BCC0089EBCE /* RealtimeInfoParserHandler.m */; };
@@ -102,6 +109,7 @@
 		43DD6CDA1540E9DF008EC99A /* WorldbikesAlertPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DD6CD91540E9DE008EC99A /* WorldbikesAlertPool.m */; };
 		43DD6CDD1540ED34008EC99A /* Alert+EXT.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DD6CDC1540ED33008EC99A /* Alert+EXT.m */; };
 		43DD6CE115410211008EC99A /* Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DD6CE015410210008EC99A /* Alert.m */; };
+		43FA954C15492DE700EA5F41 /* worldbikes.png in Resources */ = {isa = PBXBuildFile; fileRef = 43FA954B15492DE700EA5F41 /* worldbikes.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +125,18 @@
 		43199E46153A169C00B2B504 /* TestXMLCrawler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestXMLCrawler.m; sourceTree = "<group>"; };
 		43199E48153A270800B2B504 /* WorldbikesStationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldbikesStationAnnotation.h; sourceTree = "<group>"; };
 		43199E49153A270900B2B504 /* WorldbikesStationAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldbikesStationAnnotation.m; sourceTree = "<group>"; };
+		4320B97415476A38007BD4B8 /* 193-location-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "193-location-arrow.png"; sourceTree = "<group>"; };
+		432CF9871549E17500E6D1C1 /* St Stephen's Green.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "St Stephen's Green.gpx"; path = "gpx/St Stephen's Green.gpx"; sourceTree = "<group>"; };
+		432CF98A1549E37400E6D1C1 /* ChildrensUnversityHopital-StStephensGreen.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "ChildrensUnversityHopital-StStephensGreen.gpx"; sourceTree = "<group>"; };
+		432CF98C1549F27100E6D1C1 /* MKMapView+ZoomLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MKMapView+ZoomLevel.h"; path = "Worldbikes/MKMapView+ZoomLevel.h"; sourceTree = "<group>"; };
+		432CF98D1549F27100E6D1C1 /* MKMapView+ZoomLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MKMapView+ZoomLevel.m"; path = "Worldbikes/MKMapView+ZoomLevel.m"; sourceTree = "<group>"; };
+		433584E11546096F001C89A6 /* DCU-UCD.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "DCU-UCD.gpx"; sourceTree = "<group>"; };
+		433B6A6F15489B20001EB2CF /* XObjRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XObjRegion.h; path = Worldbikes/XObjRegion.h; sourceTree = "<group>"; };
+		433B6A7015489B20001EB2CF /* XObjRegion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XObjRegion.m; path = Worldbikes/XObjRegion.m; sourceTree = "<group>"; };
+		433B6A7415489CBE001EB2CF /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = City.h; path = Worldbikes/City.h; sourceTree = "<group>"; };
+		433B6A7515489CBE001EB2CF /* City.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = City.m; path = Worldbikes/City.m; sourceTree = "<group>"; };
+		434BACDA1544D53B00BDF423 /* 74-location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "74-location.png"; sourceTree = "<group>"; };
+		436766971543183A00F82D64 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		43694085152F9977004562DA /* WorldbikesUnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorldbikesUnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4369408C152F9977004562DA /* WorldbikesUnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WorldbikesUnitTests-Info.plist"; sourceTree = "<group>"; };
 		4369408E152F9977004562DA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -173,8 +193,6 @@
 		43967091153CBC50002492D4 /* FavoriteStationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FavoriteStationViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		43967093153CC423002492D4 /* WorldbikesFavoriteModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldbikesFavoriteModel.h; sourceTree = "<group>"; };
 		43967094153CC423002492D4 /* WorldbikesFavoriteModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldbikesFavoriteModel.m; sourceTree = "<group>"; };
-		4396709B153CC588002492D4 /* City.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = City.h; path = Worldbikes/City.h; sourceTree = "<group>"; };
-		4396709C153CC588002492D4 /* City.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = City.m; path = Worldbikes/City.m; sourceTree = "<group>"; };
 		43967DA015397BAE0089EBCE /* StationParserHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StationParserHandler.h; path = Worldbikes/StationParserHandler.h; sourceTree = "<group>"; };
 		43967DA115397BAE0089EBCE /* StationParserHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StationParserHandler.m; path = Worldbikes/StationParserHandler.m; sourceTree = "<group>"; };
 		43967DA415397BCC0089EBCE /* RealtimeInfoParserHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RealtimeInfoParserHandler.h; path = Worldbikes/RealtimeInfoParserHandler.h; sourceTree = "<group>"; };
@@ -198,8 +216,8 @@
 		439F1AB0152BB602008845BE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		439F1AB2152BB602008845BE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		439F1AB4152BB602008845BE /* Worldbikes-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Worldbikes-Prefix.pch"; sourceTree = "<group>"; };
-		439F1AB5152BB602008845BE /* WorldbikesAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorldbikesAppDelegate.h; sourceTree = "<group>"; };
-		439F1AB6152BB602008845BE /* WorldbikesAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorldbikesAppDelegate.m; sourceTree = "<group>"; };
+		439F1AB5152BB602008845BE /* WorldbikesAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WorldbikesAppDelegate.h; path = Worldbikes/WorldbikesAppDelegate.h; sourceTree = "<group>"; };
+		439F1AB6152BB602008845BE /* WorldbikesAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = WorldbikesAppDelegate.m; path = Worldbikes/WorldbikesAppDelegate.m; sourceTree = "<group>"; };
 		439F1AB9152BB602008845BE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		43B95D97153CD59800F33185 /* TestWorldbikesFavoriteModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestWorldbikesFavoriteModel.h; sourceTree = "<group>"; };
 		43B95D98153CD59800F33185 /* TestWorldbikesFavoriteModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TestWorldbikesFavoriteModel.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -211,8 +229,8 @@
 		43D58E16153B7D6D00922159 /* Country.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Country.m; path = Worldbikes/Country.m; sourceTree = "<group>"; };
 		43D58E1E153B7E6D00922159 /* TestStationDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestStationDAO.h; sourceTree = "<group>"; };
 		43D58E1F153B7E6D00922159 /* TestStationDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TestStationDAO.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		43DD6CBA1540C70B008EC99A /* AlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertViewController.h; sourceTree = "<group>"; };
-		43DD6CBB1540C70B008EC99A /* AlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertViewController.m; sourceTree = "<group>"; };
+		43DD6CBA1540C70B008EC99A /* AlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlertViewController.h; path = Worldbikes/AlertViewController.h; sourceTree = "<group>"; };
+		43DD6CBB1540C70B008EC99A /* AlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlertViewController.m; path = Worldbikes/AlertViewController.m; sourceTree = "<group>"; };
 		43DD6CC41540DC35008EC99A /* Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Station.h; path = Worldbikes/Station.h; sourceTree = "<group>"; };
 		43DD6CC51540DC35008EC99A /* Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Station.m; path = Worldbikes/Station.m; sourceTree = "<group>"; };
 		43DD6CC81540DC7C008EC99A /* Station+CRUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Station+CRUD.h"; path = "Worldbikes/Station+CRUD.h"; sourceTree = "<group>"; };
@@ -226,6 +244,8 @@
 		43DD6CDE1540F0D0008EC99A /* WorldbikesAlertPoolDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorldbikesAlertPoolDelegate.h; path = Worldbikes/WorldbikesAlertPoolDelegate.h; sourceTree = "<group>"; };
 		43DD6CDF1541020F008EC99A /* Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Alert.h; path = Worldbikes/Alert.h; sourceTree = "<group>"; };
 		43DD6CE015410210008EC99A /* Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Alert.m; path = Worldbikes/Alert.m; sourceTree = "<group>"; };
+		43F12FEB1546DD7500C00936 /* Dublin.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Dublin.gpx; path = Worldbikes/images/Dublin.gpx; sourceTree = "<group>"; };
+		43FA954B15492DE700EA5F41 /* worldbikes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = worldbikes.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +266,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				436766981543183A00F82D64 /* QuartzCore.framework in Frameworks */,
 				4398833C15377F5F0026B950 /* CoreLocation.framework in Frameworks */,
 				43930BA71531F16B00865755 /* MapKit.framework in Frameworks */,
 				43930B911531C57C00865755 /* CoreData.framework in Frameworks */,
@@ -258,6 +279,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		432CF9891549E1A700E6D1C1 /* gpx */ = {
+			isa = PBXGroup;
+			children = (
+				432CF98A1549E37400E6D1C1 /* ChildrensUnversityHopital-StStephensGreen.gpx */,
+				43F12FEB1546DD7500C00936 /* Dublin.gpx */,
+				432CF9871549E17500E6D1C1 /* St Stephen's Green.gpx */,
+				433584E11546096F001C89A6 /* DCU-UCD.gpx */,
+			);
+			name = gpx;
+			sourceTree = "<group>";
+		};
+		432CF98F154A0AFF00E6D1C1 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				432CF98C1549F27100E6D1C1 /* MKMapView+ZoomLevel.h */,
+				432CF98D1549F27100E6D1C1 /* MKMapView+ZoomLevel.m */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		432CF990154A0B1A00E6D1C1 /* alerts */ = {
+			isa = PBXGroup;
+			children = (
+				43DD6CBA1540C70B008EC99A /* AlertViewController.h */,
+				43DD6CBB1540C70B008EC99A /* AlertViewController.m */,
+				43DD6CDE1540F0D0008EC99A /* WorldbikesAlertPoolDelegate.h */,
+				43DD6CD81540E9DE008EC99A /* WorldbikesAlertPool.h */,
+				43DD6CD91540E9DE008EC99A /* WorldbikesAlertPool.m */,
+			);
+			name = alerts;
+			sourceTree = "<group>";
+		};
 		4369408A152F9977004562DA /* WorldbikesUnitTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,11 +343,11 @@
 				43954DB31533468900D75702 /* WorldbikesCoreService.m */,
 				43D58E15153B7D6D00922159 /* Country.h */,
 				43D58E16153B7D6D00922159 /* Country.m */,
-				4396709B153CC588002492D4 /* City.h */,
-				4396709C153CC588002492D4 /* City.m */,
 				43DD6CDF1541020F008EC99A /* Alert.h */,
 				43DD6CE015410210008EC99A /* Alert.m */,
 				43954DB41533468900D75702 /* WorldbikesModel.xcdatamodeld */,
+				433B6A7415489CBE001EB2CF /* City.h */,
+				433B6A7515489CBE001EB2CF /* City.m */,
 				43954DA61533468900D75702 /* CityDAO.h */,
 				43954DA71533468900D75702 /* CityDAO.m */,
 				43954DAA1533468900D75702 /* Country+CRUD.h */,
@@ -341,8 +394,6 @@
 				43930BB715321D9F00865755 /* WorldbikesMapViewController.m */,
 				43930B821531B20000865755 /* CountryPreferenceTableViewController.h */,
 				43930B831531B20000865755 /* CountryPreferenceTableViewController.m */,
-				43DD6CBA1540C70B008EC99A /* AlertViewController.h */,
-				43DD6CBB1540C70B008EC99A /* AlertViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -399,6 +450,8 @@
 		43967DB6153995020089EBCE /* XML Objects */ = {
 			isa = PBXGroup;
 			children = (
+				433B6A6F15489B20001EB2CF /* XObjRegion.h */,
+				433B6A7015489B20001EB2CF /* XObjRegion.m */,
 				43954DB91533468900D75702 /* XObjCity.h */,
 				43954DBA1533468900D75702 /* XObjCity.m */,
 				43954DBB1533468900D75702 /* XObjCountry.h */,
@@ -466,6 +519,8 @@
 		439E813B152CFB9300052466 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				4320B97415476A38007BD4B8 /* 193-location-arrow.png */,
+				434BACDA1544D53B00BDF423 /* 74-location.png */,
 				43939EE3153F720B008108C7 /* 72-pin.png */,
 				439E813E152D010800052466 /* 07-map-marker.png */,
 			);
@@ -475,9 +530,13 @@
 		439F1A97152BB602008845BE = {
 			isa = PBXGroup;
 			children = (
-				43DD6CDE1540F0D0008EC99A /* WorldbikesAlertPoolDelegate.h */,
-				43DD6CD81540E9DE008EC99A /* WorldbikesAlertPool.h */,
-				43DD6CD91540E9DE008EC99A /* WorldbikesAlertPool.m */,
+				43FA954B15492DE700EA5F41 /* worldbikes.png */,
+				439F1AB5152BB602008845BE /* WorldbikesAppDelegate.h */,
+				439F1AB6152BB602008845BE /* WorldbikesAppDelegate.m */,
+				439F1AB8152BB602008845BE /* MainStoryboard.storyboard */,
+				432CF990154A0B1A00E6D1C1 /* alerts */,
+				432CF98F154A0AFF00E6D1C1 /* view */,
+				432CF9891549E1A700E6D1C1 /* gpx */,
 				439F1AAC152BB602008845BE /* Worldbikes */,
 				4369408A152F9977004562DA /* WorldbikesUnitTests */,
 				439F1AA5152BB602008845BE /* Frameworks */,
@@ -497,6 +556,7 @@
 		439F1AA5152BB602008845BE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				436766971543183A00F82D64 /* QuartzCore.framework */,
 				4398833B15377F5F0026B950 /* CoreLocation.framework */,
 				43930BA51531F14A00865755 /* MapKit.framework */,
 				431810951530A9960063983A /* CoreData.framework */,
@@ -520,9 +580,6 @@
 				43954DCB153346B500D75702 /* XML */,
 				43954DCA1533469500D75702 /* Core Data */,
 				439E813B152CFB9300052466 /* images */,
-				439F1AB5152BB602008845BE /* WorldbikesAppDelegate.h */,
-				439F1AB6152BB602008845BE /* WorldbikesAppDelegate.m */,
-				439F1AB8152BB602008845BE /* MainStoryboard.storyboard */,
 				439F1AAD152BB602008845BE /* Supporting Files */,
 			);
 			path = Worldbikes;
@@ -627,6 +684,10 @@
 				439F1ABA152BB602008845BE /* MainStoryboard.storyboard in Resources */,
 				439E813F152D010800052466 /* 07-map-marker.png in Resources */,
 				43939EE4153F720B008108C7 /* 72-pin.png in Resources */,
+				434BACDB1544D53B00BDF423 /* 74-location.png in Resources */,
+				4320B97515476A38007BD4B8 /* 193-location-arrow.png in Resources */,
+				43FA954C15492DE700EA5F41 /* worldbikes.png in Resources */,
+				432CF98B1549E37400E6D1C1 /* ChildrensUnversityHopital-StStephensGreen.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -684,11 +745,12 @@
 				43199E47153A169C00B2B504 /* TestXMLCrawler.m in Sources */,
 				43D58E20153B7E6D00922159 /* TestStationDAO.m in Sources */,
 				43967096153CC423002492D4 /* WorldbikesFavoriteModel.m in Sources */,
-				4396709E153CC588002492D4 /* City.m in Sources */,
 				43B95D99153CD59800F33185 /* TestWorldbikesFavoriteModel.m in Sources */,
 				43DD6CC71540DC35008EC99A /* Station.m in Sources */,
 				43DD6CCB1540DC7C008EC99A /* Station+CRUD.m in Sources */,
 				43DD6CCF1540DD66008EC99A /* AlertDAO.m in Sources */,
+				433B6A7215489B21001EB2CF /* XObjRegion.m in Sources */,
+				433B6A7715489CBE001EB2CF /* City.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -724,7 +786,6 @@
 				4396708E153CB3F4002492D4 /* CoreDataTableViewController.m in Sources */,
 				43967092153CBC50002492D4 /* FavoriteStationViewController.m in Sources */,
 				43967095153CC423002492D4 /* WorldbikesFavoriteModel.m in Sources */,
-				4396709D153CC588002492D4 /* City.m in Sources */,
 				436DCCD2153E31180080AC40 /* WorldbikesServiceProvider.m in Sources */,
 				43DD6CBC1540C70B008EC99A /* AlertViewController.m in Sources */,
 				43DD6CC61540DC35008EC99A /* Station.m in Sources */,
@@ -733,6 +794,9 @@
 				43DD6CDA1540E9DF008EC99A /* WorldbikesAlertPool.m in Sources */,
 				43DD6CDD1540ED34008EC99A /* Alert+EXT.m in Sources */,
 				43DD6CE115410211008EC99A /* Alert.m in Sources */,
+				433B6A7115489B21001EB2CF /* XObjRegion.m in Sources */,
+				433B6A7615489CBE001EB2CF /* City.m in Sources */,
+				432CF98E1549F27100E6D1C1 /* MKMapView+ZoomLevel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -761,6 +825,7 @@
 				439F1AB9152BB602008845BE /* en */,
 			);
 			name = MainStoryboard.storyboard;
+			path = Worldbikes;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -824,7 +889,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -842,7 +907,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -855,7 +920,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Worldbikes/Worldbikes-Prefix.pch";
 				INFOPLIST_FILE = "Worldbikes/Worldbikes-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -867,7 +932,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Worldbikes/Worldbikes-Prefix.pch";
 				INFOPLIST_FILE = "Worldbikes/Worldbikes-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

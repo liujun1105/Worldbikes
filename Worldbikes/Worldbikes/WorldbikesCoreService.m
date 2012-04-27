@@ -116,11 +116,13 @@
 
 - (NSManagedObjectContext *) managedObjectContext
 {
-    if (!self.document) {
-        self.document = [self openPersistentStore];
+    @synchronized(self){
+        if (!self.document) {
+            self.document = [self openPersistentStore];
+        }
+        
+        return [self.document managedObjectContext];
     }
-    
-    return [self.document managedObjectContext];
 }
 
 - (City *) addCity:(NSString*) cityName withURLPath:(NSString*) url toCountry:(NSString*) countryName;
@@ -137,16 +139,6 @@
     [country addCitiesObject:city];
 
     assert(nil != city.country);
-    
-    NSLog(@"%@,%@ added", city.cityName, country.countryName);
-    
-//    /* this updates the MKAnnotationViews */
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"isPersistentStoreContentChanged" 
-//                                                        object:nil 
-//                                                      userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-//                                                                cityName, @"cityName", 
-//                                                                [NSNumber numberWithBool:YES], @"isForDeletion",
-//                                                                nil]];
     
     return city;
 }
@@ -169,8 +161,7 @@
     }
     
     NSLog(@"city %@ removed", cityName);
-    
-    [context processPendingChanges];    
+     
     BOOL hasMoreCity = [self.countryDAO hasCityMappedToCountry:countryName inManagedObjectContext:context];
     if (!hasMoreCity) {
         [self.countryDAO deleteCountry:countryName inManagedObjectContext:context];
@@ -334,6 +325,18 @@
 -(BOOL) stopAlertPool
 {
     return self.stopAlertPool;
+}
+
+- (NSDictionary*) regionBoundary:(NSString *)cityName
+{
+    City *city = [self city:cityName];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                  city.minLat, @"minLat",
+                                  city.maxLat, @"maxLat",
+                                  city.minLng, @"minLng",
+                                  city.maxLng, @"maxLng",
+                                  nil];
+    return dict;
 }
 
 @end

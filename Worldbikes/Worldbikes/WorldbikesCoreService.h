@@ -49,4 +49,6 @@
 -(Alert*) addAlertWithID:(NSString*) alertID andType:(NSString*) alertType toStation:(int) stationID inCity:(NSString*) cityName;
 -(BOOL) deleteAlertWithID:(NSString*) alertID andType:(NSString*) alertType;
 -(BOOL) hasAlertSet:(NSString*) alertID;
+
+-(NSDictionary *) regionBoundary:(NSString*) cityName;
 @end

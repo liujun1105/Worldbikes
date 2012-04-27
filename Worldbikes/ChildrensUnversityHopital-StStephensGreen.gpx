@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<gpx creator="GPS Visualizer http://www.gpsvisualizer.com/" version="1.0" xmlns="http://www.topografix.com/GPX/1/0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd">
+<wpt lat="53.356812" lon="-6.26238">
+  <name>From: Temple Street North, Dublin, Ireland (Children's University Hospital - Temple Street)</name>
+</wpt>
+<wpt lat="53.339828" lon="-6.26063">
+  <name>To: St Stephen's Green, Ranelagh, Ireland</name>
+</wpt>
+<trk>
+  <name>Walking directions to St Stephen's Green, Ranelagh, Ireland</name>
+  <trkseg>
+    <trkpt lat="53.356812" lon="-6.26238"></trkpt>
+    <trkpt lat="53.35582" lon="-6.261"></trkpt>
+    <trkpt lat="53.35582" lon="-6.261"></trkpt>
+    <trkpt lat="53.355042" lon="-6.26262"></trkpt>
+    <trkpt lat="53.355042" lon="-6.26262"></trkpt>
+    <trkpt lat="53.353561" lon="-6.26098"></trkpt>
+    <trkpt lat="53.353561" lon="-6.26098"></trkpt>
+    <trkpt lat="53.353168" lon="-6.26195"></trkpt>
+    <trkpt lat="53.353168" lon="-6.26195"></trkpt>
+    <trkpt lat="53.35294" lon="-6.2617"></trkpt>
+    <trkpt lat="53.35294" lon="-6.2617"></trkpt>
+    <trkpt lat="53.35265" lon="-6.26164"></trkpt>
+    <trkpt lat="53.35244" lon="-6.26178"></trkpt>
+    <trkpt lat="53.35244" lon="-6.26178"></trkpt>
+    <trkpt lat="53.352459" lon="-6.26165"></trkpt>
+    <trkpt lat="53.352459" lon="-6.26165"></trkpt>
+    <trkpt lat="53.352409" lon="-6.26153"></trkpt>
+    <trkpt lat="53.352051" lon="-6.26136"></trkpt>
+    <trkpt lat="53.347519" lon="-6.25942"></trkpt>
+    <trkpt lat="53.347519" lon="-6.25942"></trkpt>
+    <trkpt lat="53.346802" lon="-6.25908"></trkpt>
+    <trkpt lat="53.346661" lon="-6.25907"></trkpt>
+    <trkpt lat="53.345089" lon="-6.25913"></trkpt>
+    <trkpt lat="53.344891" lon="-6.25921"></trkpt>
+    <trkpt lat="53.344559" lon="-6.25944"></trkpt>
+    <trkpt lat="53.344559" lon="-6.25944"></trkpt>
+    <trkpt lat="53.34436" lon="-6.25942"></trkpt>
+    <trkpt lat="53.344059" lon="-6.25923"></trkpt>
+    <trkpt lat="53.343361" lon="-6.25926"></trkpt>
+    <trkpt lat="53.343182" lon="-6.25909"></trkpt>
+    <trkpt lat="53.343182" lon="-6.25909"></trkpt>
+    <trkpt lat="53.343231" lon="-6.25934"></trkpt>
+    <trkpt lat="53.343231" lon="-6.25934"></trkpt>
+    <trkpt lat="53.342339" lon="-6.25973"></trkpt>
+    <trkpt lat="53.34063" lon="-6.26081"></trkpt>
+    <trkpt lat="53.340149" lon="-6.26076"></trkpt>
+    <trkpt lat="53.340149" lon="-6.26076"></trkpt>
+    <trkpt lat="53.339851" lon="-6.26045"></trkpt>
+    <trkpt lat="53.339851" lon="-6.26045"></trkpt>
+    <trkpt lat="53.339828" lon="-6.26063"></trkpt>
+  </trkseg>
+</trk>
+</gpx>

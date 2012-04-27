@@ -12,7 +12,9 @@
 #import "Worldbikes.h"
 #import "WorldbikesPreferenceModel.h"
 
-@interface CountryPreferenceTableViewController : UITableViewController
+@interface CountryPreferenceTableViewController : UIViewController <UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet WorldbikesPreferenceModel *preference;
+@property (strong, nonatomic) IBOutlet UISearchBar *countrySearchBar;
+@property (strong, nonatomic) IBOutlet UITableView *countryTableView;
 
 @end

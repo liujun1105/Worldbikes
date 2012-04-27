@@ -12,4 +12,9 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
++ (WorldbikesAppDelegate *)sharedAppDelegate;  
+- (void)showActivityView;  
+- (void)hideActivityView;  
+
+
 @end

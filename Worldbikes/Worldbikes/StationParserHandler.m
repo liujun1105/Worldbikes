@@ -8,7 +8,7 @@
 
 #import "StationParserHandler.h"
 #import "XObjStation.h"
-
+#import "XObjRegion.h"
 @interface StationParserHandler ()
 @property (nonatomic,strong) NSMutableArray *stations;
 @end
@@ -51,17 +51,26 @@
         [self.stations addObject:station];
     }
     else if ([elementName isEqualToString:@"arrondissement"]) {
+        XObjRegion *region = [[XObjRegion alloc] init];
         for (NSString *key in attributeDict) {
             if ([key isEqualToString:@"minLat"]) {
-                
+                NSLog(@"Min Lat -> %@", [attributeDict valueForKey:key]);
+                region.minLat = [[attributeDict valueForKey:key] doubleValue];
             }
             else if ([key isEqualToString:@"minLng"]) {
+                NSLog(@"Min Lng -> %@", [attributeDict valueForKey:key]);
+                region.minLng = [[attributeDict valueForKey:key] doubleValue];
             }
             else if ([key isEqualToString:@"maxLat"]) {
+                NSLog(@"Max Lat -> %@", [attributeDict valueForKey:key]);                
+                region.maxLat = [[attributeDict valueForKey:key] doubleValue];
             }
             else if ([key isEqualToString:@"maxLng"]) {
+                NSLog(@"Max Lng -> %@", [attributeDict valueForKey:key]);
+                region.maxLng = [[attributeDict valueForKey:key] doubleValue];
             }
         }
+        [self.stations addObject:region];
     }
 }
 
